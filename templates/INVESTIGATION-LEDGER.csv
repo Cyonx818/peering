@@ -1,0 +1,1 @@
+investigation_id,row_kind,seal1_commit,seal2_commit,set_size,catchall_p_seal1,catchall_p_seal2,top1_hypothesis_seal1,top1_p_seal1,top1_hypothesis_seal2,top1_p_seal2,resolution,winner,winning_lens,merger_only_winner,brier_seal1,brier_seal2,log_seal1,log_seal2,uniform_baseline_brier,uniform_baseline_log,timeout_date,notes

@@ -1,0 +1,55 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git log:*)",
+      "Bash(git status:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(git diff:*)",
+      "Bash(git show:*)",
+      "Bash(git cat-file:*)",
+      "Bash(python3 scripts/commit_paths.py:*)"
+    ],
+    "ask": [
+      "Bash(python3 scripts/commit_paths.py lease * --force*)",
+      "Bash(python3 scripts/commit_paths.py lease * --release*)",
+      "Bash(python3 scripts/commit_paths.py --no-role*)",
+      "Bash(python3 scripts/commit_paths.py * --no-role*)"
+    ],
+    "deny": [
+      "Bash(git push:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git reset --soft:*)",
+      "Bash(git reset --mixed:*)",
+      "Bash(git reset --keep:*)",
+      "Bash(git restore:*)",
+      "Bash(git switch:*)",
+      "Bash(git stash:*)",
+      "Bash(git rebase:*)",
+      "Bash(git commit --amend:*)",
+      "Bash(git commit -a:*)",
+      "Bash(git commit -n:*)",
+      "Bash(git commit --no-verify:*)",
+      "Bash(git add .:*)",
+      "Bash(git add -A:*)",
+      "Bash(git add --all:*)",
+      "Bash(git clean:*)",
+      "Bash(git checkout --:*)",
+      "Bash(git branch -D:*)",
+      "Bash(git tag -d:*)",
+      "Bash(git filter-branch:*)",
+      "Bash(git filter-repo:*)",
+      "Bash(git reflog expire:*)",
+      "Bash(git gc --prune:*)",
+      "Bash(git update-ref:*)",
+      "Bash(git -C:*)",
+      "Bash(git -c:*)",
+      "Bash(rm -rf:*)",
+      "Bash(rm -fr:*)",
+      "Bash(rm -r:*)",
+      "Bash(rm -R:*)",
+      "Bash(rm *<raw-data path>*)",
+      "Read(<sealed path>/**)",
+      "Bash(*<sealed path>*)"
+    ]
+  }
+}
