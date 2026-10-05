@@ -116,6 +116,7 @@ Worked, filled versions of these files for a small invented project: `examples/m
 | `appendix-worked-example.md` | the source project and the incidents behind the rules | — | when a rule seems like red tape |
 | `examples/minimal-setup.md` | filled minimum files for an invented project | — | during Quick start A |
 | `CHANGELOG.md` | what changed between versions and why | — | when upgrading |
+| `LICENSE` | MIT terms for the docs, templates and helper | — | before reusing or redistributing |
 | `templates/commit_paths.py`, `test_commit_paths.py` | the commit helper (lock, new files, pairs, frozen paths, held subjects from the CSV list, role list and `--no-role REASON`, secrets in files and messages, leases) and its tests | minimum | setup |
 | `templates/settings-permissions.json` | Claude Code allow / ask / deny rules for R10.6 (deny rules match command text, not effects; `<raw-data path>` and `<sealed path>` are placeholders to fill in or delete; verify the rule grammar in your harness version) | default | setup |
 | `templates/PROJECT-INSTRUCTIONS.md` | the auto-loaded rules file | minimum | setup |
@@ -193,3 +194,7 @@ Worked, filled versions of these files for a small invented project: `examples/m
 | Lens card; rival slot; catch-all; kill plan; red team | investigation-phase terms: see the `templates/LENS-CARDS.md` header and R7.18–R7.21 |
 | Pre-run rulings | the Arbiter's rulings on a scorer builder's flagged gaps, committed before any datum is read (R7.23) |
 | Value-free subject | a commit subject that names the step and verdict class only (R8.15) |
+
+## License
+
+MIT. See `LICENSE`.
