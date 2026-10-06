@@ -13,6 +13,8 @@ Append-only. One row per actor × exposure: who has seen which outcome data, thr
 ## Why this exists
 A confirmatory test is only blind if its predictor, scorer and scoring reviewer have not seen the outcomes. These files let every pre-registration answer "who is exposed to what" before choosing its actors.
 
+Derivative files count (R8.1): an analysis note, feel record, investigation sheet or summary row that quotes an outcome, number, direction or category of a held step is held data like the raw datum, and reading one is an exposure.
+
 ## Rules
 1. An exposed actor is never the predictor, the blind scorer or the reviewer of the scoring for that family.
 2. A pre-registration lists every logged exposure of the actors it uses, including the predictor brief's author.

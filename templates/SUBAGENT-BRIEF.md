@@ -1,6 +1,6 @@
 # Subagent brief: <task>
 
-Spawned by: <role-id> | Date: <YYYY-MM-DD> | GUIDELINES R2.9, R2.10, R6.1–R6.5, R6.11, R6.13, R7.23, R9.16
+Spawned by: <role-id> | Date: <YYYY-MM-DD> | GUIDELINES R2.9, R2.10, R6.1–R6.5, R6.11, R6.13, R6.14, R7.23, R7.36, R9.16
 <!-- Paste this as the subagent's prompt. Do not repeat the rules file or memory: the subagent loads them itself.
      Lines tagged KNOB are optional; see GUIDELINES §15. -->
 
@@ -15,14 +15,16 @@ Harness-loaded context (the rules file and memory index every subagent auto-load
 |---|---|---|
 
 ## Output
-Write only `<output path>`. Top of the output, in this order (R6.3): line 1 `Written by: subagent <id> for <role>, brief <path>` (R2.10); the staged-directory listing where staging applies (R6.11); a `## Progress` block, updated after each phase (phase done, next phase), so a respawn can continue (R6.5); then, if the output is for the human-facing role, a "For the human" block (R6.3). During a held step that block names no result, number, direction or category; it says "withheld (step <id>)" (R8.1, R8.6).
+Write only `<output path>`. Top of the output, in this order (R6.3): line 1 `Written by: subagent <id> for <role>, brief <path>` (R2.10); the staged-directory listing where staging applies (R6.11); a `## Progress` block, updated after each phase (phase done, next phase), so a respawn can continue (R6.5); then, if the output is for the human-facing role, a "For the human" block (R6.3). During a held step that block names no result, number, direction or category; it says "withheld (step <id>)" (R8.1, R8.6). **Exception:** if the output file is itself a handoff or another current-state record (R5.16), add no `## Progress` block at the top: keep it at the END of that file, delete it when your phases are done, and put no provenance line in the record (the Record line carries the writer id; R6.3). A value you propose to the human states value, range min / max and the source of the range (R9.18).
 
 Campaign analyst: one analyst subagent may be resumed for every review of a campaign while the parent session lives; it is still briefed per task and is never resumed across a change in what it may read (R6.5); the campaign file records its agent id, the held-list and holds-table commits and the release and seal commits seen at each resume. A review of a change to a known baseline lists its sweep scope: the topics the change can reach, the signatures, the backout checks, the sentinel set named in the method doc (an unexplained sentinel move triggers the full sweep), and one line for every other topic not recomputed (R6.13).
 
 Analysis run before the human's report is on file (R9.16): write results to `<output path>` and return only `written: <path>`; the live session opens the file after the report is recorded or declined.
 
+Spawner steps after the return (R6.14): confirm the agent is idle and stop it if it is not; diff its write paths against the return (status, diff stat). Cap the line width of reads (e.g. 240 characters per line; R6.4). A rewrite task (R5.17): the rewriter never sees the reverse-read question set or key (R7.36): name the key's sealed folder under Forbidden below and give the rewriter no Bash outside its staged inputs (convention-enforced, not mechanical); the question writer returns `written: <path> @ <sha256>` only; the scorer is neither the question writer nor the rewriter.
+
 ## Forbidden (N)
-<Files and folders not to open: sealed material, held paths from `<pending list>`, other roles' handoffs.> <!-- KNOB: blinding -->
+<Files and folders not to open: sealed material, held paths from `<pending list>`, other roles' handoffs, and for a rewriter or a reader of a reverse-read the key's sealed folder `<key folder>` (R7.36).> <!-- KNOB: blinding -->
 
 ## Tools
 Allowed: <Read, Grep, Glob, Bash(<read-only commands>), Edit/Write on the output path only>. **Not allowed:** peer messaging (`SendMessage`, `ListAgents`), committing, pushing, memory writes. (For a custom agent definition, restrict its `tools:` list accordingly.)

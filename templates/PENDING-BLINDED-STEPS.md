@@ -10,6 +10,8 @@ File: `<path>.md` | View of `<path>.csv`, the only machine-read record | Only co
      Regenerate the view:
      python3 -c "import csv,sys; r=list(csv.reader(open(sys.argv[1]))); print('\n'.join('| '+' | '.join(x)+' |' for x in r[:1]+[['---']*len(r[0])]+r[1:]))" <path>.csv -->
 
+Derivative files that quote an outcome of a held step (analysis notes, feel records, investigation sheets, summary rows) are held data too: list them under `held_paths` and include them in every read-list pre-scan (R8.1, R8.10).
+
 Every start command reads the CSV. Every scorer checks it. For each row: no class change, quick-reference row, ranking change or outcome-bearing file name for the family until release; neutral commit subject `Step <id>: scored and sealed (values withheld)`; start reports show `held (step <id>)`. Brief authors and readers pre-scan listed files for the step ids before reading with a count or file-name check, never a plain grep that prints the matching line: `grep -c -F -f <held-ids file> <file>` (or `grep -l`); for a line range, `sed -n '<a>,<b>p' <file> | grep -c -F -f <held-ids file>` (R8.10, R4.11). The `<held-ids file>` is one id per line, derived from the CSV's `step_id` and `family` columns, and carries ids only. Tools (scorers, analysis tools, intake, the commit helper) read the CSV from HEAD and refuse on a pending step; a tool that cannot read it refuses rather than proceeds (R8.17).
 
 Columns of the CSV and of this view:

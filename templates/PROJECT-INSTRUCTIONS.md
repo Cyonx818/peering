@@ -16,7 +16,7 @@ Your start command names your start reads. Otherwise read only when the task nee
 
 | File | When |
 |---|---|
-| `<status file>` <!-- KNOB --> | every session: current cycle and next action per role |
+| `<now file>` <!-- KNOB --> | every session: current cycle, last session end and next action per role (the status ledger `<status file>`: only the rows a task needs) |
 | `<arbiter handoff>` | Arbiter, first |
 | `<structure doc>` | before creating, moving or naming a file (placement test, write scopes, human-readable set, frozen manifest) |
 | `<playbook>` <!-- KNOB --> | before any session that asks the human to act (walkthrough format, dose) |
@@ -35,7 +35,7 @@ Your start command names your start reads. Otherwise read only when the task nee
 9. **Before any commit:** `<repo check>` and `<tests>`.
 10. **Dependencies:** <policy, e.g. stdlib only unless the human agrees>.
 11. **No secrets** in any record, message, memory entry or commit body; name the store or variable instead.
-12. **The human's time:** every ask says what it buys and why this many <!-- KNOB: dose rule; measurement projects add the statistical basis -->; the human's stated facts are the record (silence = no change); names follow the human's act; the human's own work is informal unless they ask for a scored test (R9.9). A live, waiting human gets the answer first and bookkeeping after, and a commit a prediction needs is the next tool call of the same turn, before any readout of the data it predicts (R9.17, R9.7); name things by the names the human uses, ids in parentheses at most (R9.15); where the human's report is part of the measure, record it before they see any number (R9.16). Applied advice states a rung on the advice ladder and a source per value, comes as packages with signatures and a backout order, and follows R9.13, R9.14, R7.28, R7.32, R7.34 and R7.35 whatever the evidence knob says.
+12. **The human's time:** every ask says what it buys and why this many <!-- KNOB: dose rule; measurement projects add the statistical basis -->; the human's stated facts are the record (silence = no change); names follow the human's act; the human's own work is informal unless they ask for a scored test (R9.9). A live, waiting human gets the answer first and bookkeeping after, and a commit a prediction needs is the next tool call of the same turn, before any readout of the data it predicts (R9.17, R9.7); name things by the names the human uses, ids in parentheses at most (R9.15); where the human's report is part of the measure, record it before they see any number (R9.16). Applied advice states a rung on the advice ladder and a source per value, comes as packages with signatures and a backout order, and follows R9.13, R9.14, R7.28, R7.32, R7.34 and R7.35 whatever the evidence knob says; every value the human is asked to set is range-checked against its setting's range before it is shown, and a clamp is named "pinned at <bound>" (R9.18).
 
 ## Evidence & confidence discipline <!-- KNOB: evidence -->
 | Class | Earned by |

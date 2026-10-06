@@ -28,11 +28,19 @@ Date: <YYYY-MM-DD> | Author (predictor): <fresh subagent id> | Scorer: <fresh su
 ## §D Falsifier
 <The rival, its interval, the gap between the intervals in units of se = sd / √n (sd: file, n; block as the unit); k used and its basis (default 2); if the gap is < k·se the test cannot separate them (R7.21).> Failure rule (one sentence): <…>
 
+Decisiveness (R7.2; applies to every pre-registration, whatever the investigation knob):
+
+| Cell | Each rival's predicted interval, computed in this design's own regime, window and gates | Gap in se (spread cited: file, n; block as unit) | Independent variable verified on every subject in scope (cite; else narrow the scope label) | Decisive? |
+|---|---|---|---|---|
+
+Rivals whose intervals converge in the design's regime make it non-separable: retire the design before any prediction. A cell declared non-decisive here: <none | cells; the human was offered the trade (wait for the test / advice now and the test spent / a fresh datum later) and chose <…> on <date>; no data held for it> (R8.12).
+
 ## §E Scoring rule (fixed now)
 1. <exact computation, rounding, windows, anchors>
 2. <edge cases named in advance; unregistered ones become protocol gaps>
 3. Comparisons: <number>; correction: <method or "none">; expected false marks: <n> (R7.13).
-4. PASS = <…>; FAIL = <…>; NC (not conclusive) = <…>.
+4. PASS = <…>; FAIL = <…>; NC (not conclusive) = <…>. Define each verdict by interval relations only (observed interval vs the predicted interval and the rival's), mutually exclusive, with a stated precedence order when two rows could both apply (R7.2).
+4b. One selection rule for every arm: warm-up drops, exclusions and phase edges are written once and applied to all arms alike (R7.2).
 5. Scorer: built from this text alone (R7.23); gaps ruled in `<pre-run rulings file>`, committed before any datum is read; a refusal before data is not the run (R7.24).
 
 ## §F Dose (human effort)

@@ -2,6 +2,57 @@
 
 Rule ids are stable: v1.0 ids keep their number (their text may change, as listed here); new rules are appended within their section. Finding ids refer to each version's review-panel disposition table, kept with the maintainers' development records (not published).
 
+## v1.4 (2026-10-06)
+
+Produced from a third exchange with the source project's sessions: the gap analysis of what the source project learned in its tenth session (75 learnings: 18 covered, 36 partial, 21 missing), the "where the source project is ahead" list of the reverse analysis (items A1–A7), and the Operator and Thinker lessons files. Applied by one writer, then run through the five-seat review panel (R7.16; see "Review panel (R7.16)" below). Keyed to appendix incidents #47–#58 (new in this version). No existing rule id was renumbered or moved. Every conservative call and skipped item is listed in the maintainers' development records (not published).
+
+### Upgrading from v1.3
+The full steps are in `README.md` § "Upgrading from v1.3"; this is the same order in short.
+1. **Breaking (W1–W3):** the history-marker contract is replaced by "write the state, log the event" (R5.2, R5.3, R5.16). Handoff and status files become current-state records: rows edited in place, no `**[history]` blocks, no dated sections. Choose (A) *not now*: keep the markers as the documented legacy form (R5.3; the v1.4 start reads both forms and lists the file for consolidation), or (B) *consolidate, one role at a time*, with the live peers quiesced by a hold: first create the now-file and the status ledger, then in one commit switch that role's start command, the handoff command (whole) and the handoff-file and status templates (R2.14), then consolidate that role's handoff and the status file in its owner's session (R5.17, R7.36, `templates/CONSOLIDATION.md`; full form for every handoff and the status file), then run a start and a handoff to prove it. Copy `templates/atom_diff.py` first (the atom diff needs a tool) and back up the repository off-machine.
+2. Add `STRUCTURE.md` §3c (record kinds, never-consolidated list, checker exemptions with reasons) and the new placement and write-scope rows (footnote 20: each role writes its own now-file row).
+3. Re-copy `PREREGISTRATION.md` and apply the R7.2 decisiveness gate to every pre-registration, whatever the investigation knob; re-copy the other changed templates listed in the README (they now include `PANEL-BRIEF.md`, `PROJECT-INSTRUCTIONS.md` and the new `deny` / `ask` entries in `settings-permissions.json`).
+4. `commit_paths.py` and its tests are unchanged (23 tests; its docstring still says v1.3, because the code did not change); gating a commit on the check's own exit status (R10.4) is a project-side change.
+
+### New rules (appended within their sections)
+- R2.14 restructure a cited record without breaking its readers (#52); R2.15 a check says exactly what it checks and its exemptions are tested (#51).
+- R5.16 write the state, log the event (#47); R5.17 consolidate with a drop ledger, an atom diff and no class creep (#48, #49).
+- R6.14 stop a subagent once its report is in (#57).
+- R7.36 reverse-read test for any rewrite of a record (#48, #50).
+- R9.18 range-check every proposed value before the human sees it (#58).
+- R10.10 integrity failures at intake: one standing exception, everything else to the Arbiter (#56).
+- R12.2 contact with outside parties is the human's (codified practice, no incident).
+
+### Amended rules (ids unchanged)
+- **Rewritten (breaking):** R5.2 (a role handoff is a current-state record; was "Current first, history after") and R5.3 (start reads by heading order and fails loudly; the `[history]` marker contract survives only as a legacy form). R5.10 (a §10 row only for a correction that still bears on reading, W2).
+- R1.5 (a method or process proposal is adopted by ruling, not classed as a lead, W4); R2.4 (lines of a current-state record are edited in place, W7); R2.5 (a frozen-manifest entry may freeze a header line); R2.10 (quotation marks only around words at a cited source); R4.9 (kill test on every design answer); R4.14 (default grant for preference and method briefs); R5.4 (§4 is a pointer map); R5.7 (record gate on added lines, shape check); R5.15 (wire-in rows: class change → ledger, Thinker response items → disposition); R6.4 (cap read widths); R6.7 (never trim to a size target without a reverse-read); R7.2 (the decisiveness gate applies to every pre-registration; W5); R7.11 and R7.31 (backfilling rulings found in prose; the `refines <id>` form); R7.23 (a bespoke scorer calls the pinned guards or tests its own); R7.28 (layer before lever; a "limit" claim states its signature); R7.30 (process methods log defects of the method); R8.1 (derivative files are held data); R8.9 (the human-readable column sets review depth for rewrites); R8.12 (offer the trade before a hold on the human's own data); R8.15 (the tripwire may key on a content marker); R8.16 (a guard identifies a datum by content, never by name: resolve the path, compare the file's sha256 with the catalog, check the identity field in the first record; #54); R9.3 (independent readout once per package); R9.13 (a habit band is a prior, an unknown readout is no rung); R9.14 (match the reference's measured behavior signature; a metric and falsifier per subjective statement; name confounded lever pairs); R10.4 (gate on the check's own result, never a pipe; link only committed targets; #55); R14.2 (the status update edits rows, never adds a dated section; W6); §1 Thinker row ("the reader who is not inside the pipeline").
+
+### Fixes to rules that looked wrong (B §5)
+- W1 R5.2 / R5.3 and the handoff-file, handoff-command and start-command lazy-read steps; W2 R5.10; W3 the status template's history cells; W4 R1.5; W5 R7.21 items (3), (4), (6) now apply to every pre-registration through R7.2; W6 R14.2; W7 R2.4.
+
+### Templates and helper
+- `HANDOFF-FILE.md` rewritten: heading-order contract, Record line, Session state and Open wire-in tables in the header, §4 a pointer map, §7 Trajectory, §10 only for corrections that still bear on reading. `HANDOFF-COMMAND.md` and `START-COMMAND.md`: rows edited in place, heading-order check, record gate on added lines, empty-slice stop, the now-file at A1, two new wire-in rows, exit-status gating, stop the writer after its return. `STATUS.md` rebuilt as a ledger. New `NOW.md` and `CONSOLIDATION.md`.
+- `STRUCTURE.md` (placement rows, §3c record kinds and checker exemptions), `WRITE-SCOPES.md` (two rows), `PREREGISTRATION.md` (decisiveness table, verdict rows by interval relations, one selection rule), `REVIEW-REPORT.md` (rewrite checklist), `SUBAGENT-BRIEF.md`, `BRIEF.md`, `RESPONSE.md` (kill test), `ROLE-CHARTER.md` (rules 8–10), `EXPOSURE-LOG.md` and `PENDING-BLINDED-STEPS.md` (derivative files), `OPERATOR-FOLDER-HANDOFF.md`, `settings-permissions.json` (`ask` entries for outside-posting commands), `examples/minimal-setup.md` (handoff in the new form).
+- `commit_paths.py` and `test_commit_paths.py`: **unchanged** (its version string stays v1.3: the code did not change). The optional helper features B proposed (run the check itself, refuse links to untracked paths) and the content-keyed guards of the reverse analysis (A5) are documented as project options in R10.4, R2.5 and R8.15; no helper code was written because the writer has no shell to run the tests. The review panel added one new tool, `atom_diff.py`, and its tests (see below).
+
+### §13 and §15
+- §13 gains ten rows (log-shaped record, trim to target, class creep, quote inflation, stale key, exempted target, silent parser, non-decisive design sealed, name-only guard, piped gate). §15 gains a "Record consolidation" row; the "Handoff file" and "Helper guards" rows are updated.
+
+### Appendix
+- Incidents #47–#58, evidence cited generically; lesson 3 updated and lesson 10 added; incident #14 notes its supersession.
+
+### Not applied
+- See the maintainers' development records (not published): the helper changes and the reverse analysis's `CURRENT-STATE-RECORD.md` template (covered by `STATUS.md` and `NOW.md`). The `ask` list was widened by the review panel.
+
+### Review panel (R7.16; reviews/v1.4/)
+Five seats (architecture, agentic, usability, safety, proofread); 0 Critical, 15 High-class findings counted across seats (overlapping ones merged under seven orchestrator rulings), plus Medium and Low items; dispositions in `reviews/v1.4/DISPOSITION.md` (kept with the maintainers' development records, not published). Changes:
+- **Heading-order check** (R5.3; ruling R1): applies only to the sections present, compared on the `§<n>` token; the minimum handoff and the shipped example pass; the legacy form is detected mechanically (`grep -c`); the §7 read stops at a `### Trajectory` heading; a writer's progress block goes at the END of an output file that is itself a record, and is deleted when done (R6.3, R6.5).
+- **Sealed key** (R7.36; R2): the key lives in its own sealed folder, separate from the rewriter's working files; the rewriter's and readers' forbidden lists name it; stated plainly as convention-enforced, not mechanical. The rewrite goes to a candidate path and the consolidation record carries a Stage line; `CONSOLIDATION.md` is two files with a "how to run" box. Scoring: best part per question, via-pointer scoring, at most two restore rounds.
+- **One copy of the next action** (R5.16; R3): the now-file holds the next action (one row per role, each role writes its own row; R2.7 second exception) and the last session end; handoff and example point to it.
+- **Upgrade order** (R4): now-file first, then switch the start command; per role; quiesce live peers with a hold; the start keeps its legacy `[history]` read; README and this entry agree.
+- **Gate coverage** (R5.7, R5; R7): a modified-row class check and an atom diff of changed record files as gate options; "session-start commit" defined and recorded in the now-file; new `templates/atom_diff.py` and `test_atom_diff.py` (not yet run by the writer; run them before release).
+- **Held values** (R6): the held list, holds table and exposure logs are never consolidated; the never-drop list covers hold and exposure lines; a held-ids pre-scan before any consolidation; atom-diff output goes to a file scanned for held ids; R8.16 strengthened (canonical path, case-folded name, content check of edited copies, files not in the catalog refused, only the Arbiter adds catalog rows).
+- **Smaller:** R7.36 trigger defined (consolidation, restructure, trim); trajectory rows retire; R9.18 clamp before the prediction commit and cited in START-COMMAND, PROJECT-INSTRUCTIONS and §15; R10.6 deny-list gaps (`git reset` every form, `git config`, `--git-dir`, `rm` forms, `gh api`, visibility changes, MCP posting tools; sandbox note; placeholder rows are a setup failure); R10.10 and R12.2 tightened; panel output paths carry `<version>/`; changelog and appendix no longer point to unpublished files or a source-project verdict.
+
 ## v1.3 (2026-10-05)
 
 Produced from a second exchange with the source project's sessions: the gap analysis of what the source project learned after v1.2 (51 learnings, 12 missing, 25 partial), the "where the source project is ahead" list of the reverse analysis (items A1–A5), and the Operator and Thinker lessons files. Then run through the five-seat review panel (R7.16; see "Review panel (R7.16)" below). Keyed to appendix incidents #36–#46 (new in this version). No existing rule id was renumbered or moved.

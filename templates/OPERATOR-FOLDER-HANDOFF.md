@@ -2,7 +2,8 @@
 
 <!-- One pair per work folder: 99-handoff.md (this file: the state, the authority) and
      99-next-session-prompt.md (below the line: only what to read, R5.1). Every line cites a commit or file.
-     Lazy-read markers as in HANDOFF-FILE.md (**[history]** lead-ins). Lines tagged KNOB are optional. -->
+     A current-state record as in HANDOFF-FILE.md (R5.16): rows edited in place, no [history] blocks; the old version
+     stays in version control. Lines tagged KNOB are optional. -->
 
 **Header.** <date>, session <n>. <One paragraph: what the human did, what we now know, the next step.>
 

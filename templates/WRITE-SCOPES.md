@@ -23,7 +23,10 @@ Decided by the human on <YYYY-MM-DD> (decision log `<DEC-id>`). GUIDELINES §2.
 | rules file (`CLAUDE.md`), structure doc, methods / playbook | S | P | P | yes |
 | charter, goals | W¹ | R | R | yes |
 | decision log | S² | P² | P² | yes |
-| status file (incl. Thinker log, automation runs) <!-- KNOB --> | S | P | R | yes |
+| status ledger (rows edited in place, R5.16; incl. Thinker log, automation runs) <!-- KNOB --> | S | P | R | yes |
+| now-file `NOW.md` <!-- KNOB --> | S; W own row²⁰ | W own row²⁰ | R (the Arbiter refreshes its row) | yes |
+| consolidation records `CONSOLIDATION.md` (R5.17, R7.36): main file (Parts 3-4) | S | P | R | no |
+| consolidation key file (Parts 1-2), in its own sealed folder, never seen by the rewriter or the readers (convention-enforced, R7.36) | S | N | N | no |
 | pending-blinded-steps list: CSV record and Markdown view (values-free) <!-- KNOB: blinding --> | S | R | R | yes |
 | holds table `holds.csv` (R3.12; in the minimum) | S; A¹⁹ | A¹⁹ | A¹⁹ | yes |
 | exposure files `exposure/<role>.md` <!-- KNOB: blinding --> | S own; R all | S own | S own | no |
@@ -76,6 +79,7 @@ Decided by the human on <YYYY-MM-DD> (decision log `<DEC-id>`). GUIDELINES §2.
 17. The hunch (`00b-hunch.md`) and other generators' lists only after its own list is committed; as merger, what the INVESTIGATION allowed-inputs table names for the merger. The "Who sees what" table in the investigation's flag agrees with this matrix.
 18. Including the one `answer:` path a committed brief names (R4.4): the brief is the grant, one file only.
 19. The recorded exception to one committer per shared file (R2.7): the holds table is append-only; the role that receives a hold, or the human's confirmation or release, appends its row at once, one helper call per row, after the R2.8 dirty check. Rows are never edited; the latest row per hold id is current; only the human's own words move a hold to `released` (R3.12).
+20. The second recorded exception to one committer per shared file (R2.7): each role edits only its own "next action" row of the now-file at its own handoff (and its "Session start" line at its first write), one helper call, after the R2.8 dirty check; the Arbiter owns the rest and refreshes the Thinker's row from its `HANDOFF.md`. A subagent rewriter (R5.17) has N on the consolidation key file (R7.36).
 
 ## Minimum variant (Quick start A: Arbiter + Operator)
 

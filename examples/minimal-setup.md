@@ -130,16 +130,20 @@ Start /docs-arbiter · End /docs-handoff arbiter · Handoff docs/handoff-arbiter
 ```markdown
 # Arbiter handoff: docs-rewrite
 
-<!-- LAZY-READ CONTRACT … (copied unchanged from templates/HANDOFF-FILE.md) -->
+<!-- CURRENT-STATE CONTRACT … (copied unchanged from templates/HANDOFF-FILE.md) -->
 
-**Session 2 header.** End of session 2, 2026-05-06. The link checker now covers anchors; 14 of 60 pages
-pass the style guide (scripts/check_links.py @ d4e5f6a). Next action: add the sentence-case rule
-(DEC-0003) to the style guide and re-run the checker.
+**Record:** status current; current as of 2026-05-06; old version at `a1b2c3d:docs/handoff-arbiter.md`; drop ledger none.
 
-**Wired this session:** link-checker anchors → Key commands in CLAUDE.md (d4e5f6a). **Open wire-in:** none.
+**Session state**
+| Item | Current |
+|---|---|
+| Last session end | session 2, 2026-05-06; HEAD before the handoff commit (= §1 row 6) d4e5f6a (no now-file in the minimum, so this row is the record) |
+| What changed, what we now know (next action: §7) | The link checker now covers anchors; 14 of 60 pages pass the style guide (scripts/check_links.py @ d4e5f6a) |
+| Checks at that end | link checker and tests pass (d4e5f6a) |
+| Wired this session | link-checker anchors → Key commands in CLAUDE.md (d4e5f6a) |
+| Running work | none |
 
-**[history] Session 1 header.** End of session 1, 2026-05-04. Roles adopted (DEC-0001); helper and link
-checker installed (a1b2c3d).
+**Open wire-in:** none.
 
 ## §0 Orientation and peers
 Arbiter of docs-rewrite (docs/charter-arbiter.md). The operator drafts pages with Sam.
@@ -148,12 +152,10 @@ Arbiter of docs-rewrite (docs/charter-arbiter.md). The operator drafts pages wit
 | "Docs Operator" | operator | unknown | closed | work/handoff-operator.md @ c7d8e9f |
 Messages: open items sent by me: none. Acked this session: M-operator-2.
 
-**[history] Peer state at the end of session 1.** Operator not yet started.
-
 ## §1 Start-of-session checklist
 | # | Step | Detail |
 |---|---|---|
-| 2 | Read this file, current blocks only | lazy-read contract |
+| 2 | Read this file by heading order | contract above; stop if the heading check fails |
 | 4 | Lease and peers | commit_paths.py lease arbiter --name "Docs Arbiter"; outbox rows to arbiter |
 | 6 | HEAD before the handoff commit | d4e5f6a |
 | 7 | Journal of the last session | arbiter/journal-2026-05-06.md |
@@ -167,7 +169,7 @@ Messages: open items sent by me: none. Acked this session: M-operator-2.
 Open holds: none.
 
 ## §7 Next action and ranking
-**Next action:** add the sentence-case rule to docs/style-guide.md; first step: brief a writer.
+**Next action:** add the sentence-case rule (DEC-0003) to docs/style-guide.md and re-run the checker; first step: brief a writer. (The one copy: this minimum project has no now-file.)
 | Rank | Item | Value | Sam's effort | Cost |
 |---|---|---|---|---|
 | 1 | heading rule + re-check | unblocks 9 pages | none | cheap win |
@@ -175,13 +177,10 @@ Open holds: none.
 **Open questions to Sam:** none.
 **In flight:** uncommitted: none · outbox items not done: none · live subagents: none
 
-**[history] Ranking, end of session 1.** 1 link checker anchors; 2 style-guide draft.
-
 ## §10 Review & corrections
 | Review | Finding | Applied |
 |---|---|---|
-| Handoff writer, end of session 2 (2026-05-06) | brought current from the journal | header, §0, §7; HEAD d4e5f6a |
-| Handoff writer, end of session 1 (2026-05-04) | first handoff | all sections |
+| (none: no correction still bears on how this file is read; the handoff commit body is the record) | | |
 ```
 
 ---

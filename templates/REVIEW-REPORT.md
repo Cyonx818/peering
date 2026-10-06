@@ -31,6 +31,16 @@ Date: <YYYY-MM-DD> | Reviewer: <CR (code or record review) | RO (robustness revi
 - [ ] with parameters near the unit count, a leave-one-out score is described as extrapolation, not misfit
 - [ ] one source-of-truth query checked whether subjects differ at baseline in the factor behind any cross-subject pattern
 
+## Checklist for a review of a record rewrite (R5.17, R7.36, R2.10, R2.15; report any missing item as High)
+- [ ] per id, class(new) ≤ class(old); status words ("habit", "lead", "open") compared as classes; no conclusion word stronger than its row's class
+- [ ] every quotation mark encloses character-exact words from a cited source; no gloss in quotes
+- [ ] every atom-diff ledger match confirmed by the reviewer (a mention elsewhere in the ledger is not an accounting)
+- [ ] qualifiers, negations and "replaced" framings still inside their rows
+- [ ] the drop ledger and atom map exist and close with "no class was raised" and the held-step check
+- [ ] the reverse-read ran in the right form (light / full), its key sealed before the rewrite, success rule met, any "not blind" reader labeled
+- [ ] the method's invariant table says per invariant "yes / partly / no: who checks it", and its "mechanical" claims match what the tool does
+- [ ] the checker's exemptions were run on a renamed copy of each record it polices
+
 ## Checked and fine
 <What was verified with no finding, so the next review does not repeat it.>
 
@@ -45,7 +55,7 @@ Date: <YYYY-MM-DD> | Reviewer: <CR (code or record review) | RO (robustness revi
 
 ## Appendix: the full review panel (GUIDELINES R7.16; a suggestion for maximum rigor)
 
-When maximum rigor is called for, run these five seats **in parallel, read-only**, each writing its own copy of this report (`reviews/review-<seat>.md`), briefed with `templates/PANEL-BRIEF.md`:
+When maximum rigor is called for, run these five seats **in parallel, read-only**, each writing its own copy of this report (`reviews/<version>/review-<seat>.md`), briefed with `templates/PANEL-BRIEF.md`:
 
 | Seat | Agent | Lens |
 |---|---|---|
@@ -56,4 +66,4 @@ When maximum rigor is called for, run these five seats **in parallel, read-only*
 | 5 | technical-writer | errors, typos, omissions, cross-reference consistency |
 | 6 (optional) | the project's Thinker session | a considered cross-cutting opinion, as a brief/response pair |
 
-Then **one** writer applies everything and records a disposition table (`reviews/DISPOSITION.md`: finding id → applied / declined, with the reason) and a changelog entry. Scale it down for lower-risk work: one CR seat is the default (R7.7); two seats (e.g. 1 and 4) suit a protocol change.
+Then **one** writer applies everything and records a disposition table (`reviews/<version>/DISPOSITION.md`: finding id → applied / declined, with the reason) and a changelog entry. Scale it down for lower-risk work: one CR seat is the default (R7.7); two seats (e.g. 1 and 4) suit a protocol change.

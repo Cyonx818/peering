@@ -18,6 +18,7 @@ round: <design briefs only: 1 (knowledge list + outline) / 2 (design against pac
 
 ## Questions to the human <!-- KNOB: Thinker (R4.14) -->
 <not allowed | allowed on <topics: goals, acceptability, preferences>, ≤ <n> questions, each answerable in one choice, value-free>
+Default for a brief on the human's preferences or on method with no held step open: "allowed on the brief's topic, e.g. ≤ <4> questions" (R4.14).
 Held steps: <no held step involves the human (checked on <date> against `<pending list>`) | held steps <ids> are named here and must not be touched>. A grant without this line is void. Thinker's exposure rows for a family with a pending step: <none | rows; then every question and option text is written in this brief and checked by an unexposed reader>. While any held step is open, the Arbiter screens every question and option text before the human sees it (R4.14, R8.10).
 
 ## Read (pointers only, in order)

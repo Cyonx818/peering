@@ -1,4 +1,4 @@
-# Peering: a framework for multi-session human–AI peer collaboration (v1.3)
+# Peering: a framework for multi-session human–AI peer collaboration (v1.4)
 
 ## What this is
 
@@ -37,7 +37,7 @@ Everything else is the sessions' job. If a session asks you for anything else, R
 | Subagents with short returns | orchestrator mode (R6.1–R6.5) | the Agent tool; resume by agent id only while the parent session lives | Direct-writer mode: the session does the work itself and writes detail to files |
 | Cross-session messaging | live peer notifications (R3.6) | `ListAgents` / `SendMessage` (deferred tools; load with `ToolSearch` `select:ListAgents,SendMessage`); availability depends on version and configuration | Outbox files only; you are the courier ("check your inbox") |
 | Persistent memory | behavior rules (§11) | the project memory folder and its `MEMORY.md` index (per machine, not in git; index truncated after about 200 lines) | The committed memory mirror (R11.9) read at start |
-| Permission rules | R10.6 | `.claude/settings.json` `permissions.allow` / `deny` (`templates/settings-permissions.json`) | Prose bans only; review commits |
+| Permission rules | R10.6 | `.claude/settings.json` `permissions.allow` / `ask` / `deny` (`templates/settings-permissions.json`) | Prose bans only; review commits |
 | Session names | sender checks (R3.9) | `/rename` | A name line in each session's first report |
 | Per-agent read isolation | staged inputs for independent agents (R6.11) | a fresh private directory per agent outside the working tree, listing checked before launch. Staging hides paths, but a subagent still auto-loads the rules file and the memory index, so those carry no outcome value of a held or scored step. For strict blindness run the blind agent as a separate session whose working directory is the staged folder (or another mechanism that prevents the auto-load); at the high-risk knob also a post-run transcript read audit | Staging plus the auto-load rule: the listing proves what was offered, not what was read or loaded; without transcripts write `Reads unverified` in the output header |
 
@@ -55,7 +55,7 @@ An **Arbiter** (owns records, standards and tools) and one **Operator** (your da
 | 2 | Fill `templates/PROJECT-INSTRUCTIONS.md` as `CLAUDE.md`: what the project is, rules 2, 5, 7, 8, 11, 12, the sessions table | 10 min |
 | 3 | Two charters from `templates/ROLE-CHARTER.md` (arbiter: orchestrator mode; operator: direct writer). Put the "Minimum variant" table of `templates/WRITE-SCOPES.md` in `docs/STRUCTURE.md` with the placement test from `templates/STRUCTURE.md` | 10 min |
 | 4 | Create `docs/decisions.csv` from `templates/DECISION-LOG.csv` (header only). First row: your adoption of the roles and scopes, in your words | 2 min |
-| 5 | One handoff file per role from `templates/HANDOFF-FILE.md`, keeping Header (with the two wire-in lines, "none" is valid, R5.15), §0, §1, §2, §6 (one line: "Open holds: <ids or none>"), §7, §10. Create `docs/holds.csv` from `templates/HOLDS.csv` (header only; the holds table, R3.12) and `peers/outbox-arbiter.md` and `peers/outbox-operator.md` from `templates/OUTBOX.md` | 5 min |
+| 5 | One handoff file per role from `templates/HANDOFF-FILE.md`, keeping Header (the Record line, the Session state table with its "Wired this session" row and the Open wire-in table; "none" is valid, R5.15), §0, §1, §2, §6 (one line: "Open holds: <ids or none>"), §7, §10. Create `docs/holds.csv` from `templates/HOLDS.csv` (header only; the holds table, R3.12) and `peers/outbox-arbiter.md` and `peers/outbox-operator.md` from `templates/OUTBOX.md` | 5 min |
 | 6 | Install commands: `templates/START-COMMAND.md` twice as `.claude/commands/<project>-arbiter.md` (common steps + Arbiter block) and `<project>-operator.md` (common steps + Operator block); `templates/HANDOFF-COMMAND.md` once as `<project>-handoff.md` (Arbiter and Operator branches). Fill the `allowed-tools` placeholders. Optionally merge `templates/settings-permissions.json` into `.claude/settings.json` | 10 min |
 | 7 | Smoke tests (below) | 10 min |
 
@@ -69,10 +69,11 @@ Worked, filled versions of these files for a small invented project: `examples/m
 | Advice depends on a claim that could be wrong | evidence classes, pre-registration, per-datum ledger | §7; `PREREGISTRATION.md`, `DATA-STATUS-LEDGER.md`, `REVIEW-REPORT.md` |
 | You are a test subject or rater | blinding | §8; `PENDING-BLINDED-STEPS.md`, `EXPOSURE-LOG.md`, the human-readable set in `STRUCTURE.md` |
 | A session corrects its behavior after your feedback | memory entries, the same day | §11; `MEMORY-ENTRY.md` (Claude Code: the project memory folder) |
-| Starts get slow or handoffs lose facts | status file, journal, token audit | R5.12, R6.6; `STATUS.md`, `JOURNAL.md` |
+| Starts get slow or handoffs lose facts | status ledger and now-file, journal, token audit | R5.12, R5.16, R6.6; `STATUS.md`, `NOW.md`, `JOURNAL.md` |
+| A status or handoff file grows by dated notes, or a start reads mostly history | consolidate it once into a current-state record, with a drop ledger, an atom diff and a blind reverse-read | R5.16, R5.17, R7.36, R2.14, R2.15; `CONSOLIDATION.md`, `atom_diff.py`, `STRUCTURE.md` §3c |
 | Several work items in parallel | role instances | R1.11; §8 of the handoff file |
 | An insight is flagged for explanation and a test on the human would cost more than <N, e.g. 2> hours, or a test chosen from the first explanation already failed (off by default; needs the evidence knob and a Thinker) | the investigation phase: isolated generators, averaged probability sheets, a red team, a kill plan, a scored ledger | R7.17–R7.22, R6.11, R6.12; `INVESTIGATION.md`, `LENS-CARDS.md`, `INVESTIGATION-LEDGER.csv` |
-| Work gets built and then forgotten between sessions | the full surface inventory and grep at every handoff (the wire-in table and the two header lines are already in the minimum, R5.15) | R5.15; `HANDOFF-COMMAND.md`, `HANDOFF-FILE.md` |
+| Work gets built and then forgotten between sessions | the full surface inventory and grep at every handoff (the wire-in table and the "Wired this session" and "Open wire-in" header entries are already in the minimum, R5.15) | R5.15; `HANDOFF-COMMAND.md`, `HANDOFF-FILE.md` |
 | A job is rerun by hand and you lose track of what is new | the automation table (the status file's table, or `AUTOMATION-RUNS.md` for many jobs) | R5.9; `STATUS.md`, `AUTOMATION-RUNS.md` |
 | You deliver files (captures, exports) to the project | data intake: normalize on receipt, catalog | R2.11, R10.9 |
 | A second tool duplicates an existing one, or you have more than a handful | the tool registry (until then the rules file's Key commands list is the registry) | R2.12; `STRUCTURE.md` §3b |
@@ -81,6 +82,16 @@ Worked, filled versions of these files for a small invented project: `examples/m
 | Scorers are built by agents | scorer built from the pre-registration text, pre-run rulings, one-run definition, pins that retire | R7.23–R7.27, R10.8; `PREREGISTRATION.md` |
 | A protocol or framework needs maximum rigor | the five-seat review panel | R7.16; `PANEL-BRIEF.md`, `REVIEW-REPORT.md` |
 | Two sessions collide on files often | one worktree per role | §15 |
+
+## Upgrading from v1.3
+
+1. **Breaking, handoff and status files.** v1.4 replaces the history-marker contract with "write the state, log the event" (R5.2, R5.3, R5.16). A handoff or status file is now a current-state record: rows edited in place, no `**[history]` blocks, no dated sections, a "Record" line naming the commit that holds the old version. **Choose a path.**
+   - **(A) Not now.** Keep the `**[history]` markers as the legacy reading aid (R5.3). The v1.4 start reads both forms (it detects a legacy file with `grep -c '^\*\*\[history\]' <file>` and reports "legacy file: <path>"), so you can switch the commands at any time; list each legacy file as an open wire-in item for consolidation.
+   - **(B) Consolidate, one role at a time.** Quiesce the live peers first: record a hold in the holds table ("no start or handoff by <role> until its switch commit"), confirmed by you, and release it in the switch commit. For each role: **(1)** create the now-file from `templates/NOW.md` and the status ledger from `templates/STATUS.md` (the v1.4 start reads both and stops on an empty read, so they come first); **(2)** in one commit switch that role's start command and the new handoff-file and status templates (R2.14): re-copy `START-COMMAND.md` and `HANDOFF-COMMAND.md` whole (the handoff command is one universal file: switch it with the first role) and carry over your filled placeholders; the v1.4 start still reads a legacy file; **(3)** consolidate that role's handoff, then the status file, in its owner's session with a drop ledger, an atom diff and a reverse-read (R5.17, R7.36; `templates/CONSOLIDATION.md`); a role's file stays legacy until its consolidation commit; **(4)** run a start and a handoff to prove it (R2.14).
+   - **Cost and your part.** The Arbiter session runs it, with subagents for the question writer, rewriter, readers and scorer: about one Arbiter session per role file. Handoffs are start reads and the status file is human-readable, so both take the full form (R7.36). Your part: read the rules section of each rewritten status file and confirm it (about 10 minutes per file); rule on a stale key if asked. Apply the §15 "Record consolidation" row at the size of the file. Before you start: copy `templates/atom_diff.py` and `test_atom_diff.py` to `scripts/` and run its tests (the atom diff needs a tool), and make an off-machine backup of the repository (dropped history survives only in `.git`).
+2. Add the new `STRUCTURE.md` §3c (record kinds, the never-consolidated list including the held list, holds table and exposure logs, checker exemptions with a reason each) and the rows for the now-file and consolidation records (main file and the key file in its own sealed folder) in the placement test and the write-scope matrix (footnote 20: each role writes its own now-file row).
+3. Re-copy `PREREGISTRATION.md` (decisiveness table; verdict rows by interval relations) and apply the new R7.2 gate to every pre-registration, whatever the investigation knob. Re-copy `SUBAGENT-BRIEF.md`, `REVIEW-REPORT.md`, `PANEL-BRIEF.md`, `BRIEF.md`, `RESPONSE.md`, `ROLE-CHARTER.md` role-specific rules 8–10, `PROJECT-INSTRUCTIONS.md` (rule 12 and the read-first row), `EXPOSURE-LOG.md`, `PENDING-BLINDED-STEPS.md` and `settings-permissions.json` (new `ask` and `deny` entries; verify them against your harness and fill or delete every `<placeholder>` row).
+4. `commit_paths.py` is unchanged in v1.4 (its docstring still says v1.3); its 23 tests still apply. Gating a commit on the check's own exit status (R10.4) is a project-side change to your commit flow.
 
 ## Upgrading from v1.2
 
@@ -93,7 +104,7 @@ Worked, filled versions of these files for a small invented project: `examples/m
 
 1. **Commit helper.** In a scratch clone: commit a new file with `--role` (expect exit 0 and only that file in the commit); commit with no role and no `PEERING_ROLE` (expect exit 2 and a message that lists the configured roles and does not name a bypass); commit with `--role` set to a name not in `ROLES` (expect exit 2); commit with `--no-role "bootstrap"` (expect exit 0 and the trailer `Session-Role: none (bootstrap)`); commit `.` (expect exit 2); hold the lock from a second shell (`python3 -c` with `fcntl.flock`) and commit (expect exit 3 after `--timeout`); with the blinding knob on, pass `--held-file` a missing path, the Markdown view and a CSV with a pending row (expect exit 2 for the first two, and a refused verdict word next to the pending id for the third). The bundled unit tests cover these and pairs, frozen paths, held subjects (CSV only, fail closed), secrets in files and messages, and leases.
 2. **Messaging.** Session A lists agents and sends a one-line notification to B; B receives it; A closes; B sends to A and observes what happens. Write the observed semantics into the table in `PEER-MESSAGE-PROTOCOL.md`. No messaging tool → outbox files only.
-3. **Start / handoff round trip.** Run the Arbiter start: expect a ≤ 15-line report that ends by waiting for you, with no permission prompts. Ask for one trivial change. Run the handoff: expect a commit through the helper, a header carrying the two wire-in lines ("none" is valid) and a final line `Next session: …`. Open a fresh session, run the start, and check it names the change. Then run the marker grep from the handoff file's contract and check it lists every section. Hold test: in the Operator session tell the Arbiter "hold X until I say so", have it relay that to the Operator, then reset the Operator and start it fresh: the report must list the hold as `held (relayed, unconfirmed)` first and ask you to confirm it. All pass → setup is done; do the token audit (R6.6) after the first real cycle.
+3. **Start / handoff round trip.** Run the Arbiter start: expect a ≤ 15-line report that ends by waiting for you, with no permission prompts. Ask for one trivial change. Run the handoff: expect a commit through the helper, a header carrying the "Wired this session" row and the Open wire-in table ("none" is valid), rows edited in place with no new header block, and a final line `Next session: …`. Open a fresh session, run the start, and check it names the change. Then run the heading check from the handoff file's contract (`grep -n '^## ' <file>`) and check it passes (sections present in the template's order, the minimum §0 §1 §2 §6 §7 §10 present: the shipped example passes); delete a required heading in a scratch copy and check the start stops with "handoff structure broken". Run `cd templates && python3 -m unittest test_atom_diff` (the atom-diff tool's tests). Hold test: in the Operator session tell the Arbiter "hold X until I say so", have it relay that to the Operator, then reset the Operator and start it fresh: the report must list the hold as `held (relayed, unconfirmed)` first and ask you to confirm it. All pass → setup is done; do the token audit (R6.6) after the first real cycle.
 
 ## Translation table (other kinds of project)
 
@@ -125,14 +136,17 @@ Worked, filled versions of these files for a small invented project: `examples/m
 | `templates/STRUCTURE.md` | layout, placement test, path map, human-readable set, frozen manifest | minimum | before creating a file |
 | `templates/START-COMMAND.md` | session start: common steps plus a block per role | minimum | setup |
 | `templates/HANDOFF-COMMAND.md` | universal handoff with a branch per role | minimum | setup |
-| `templates/HANDOFF-FILE.md` | a role's memory file with the lazy-read contract | minimum | setup |
+| `templates/HANDOFF-FILE.md` | a role's memory file, a current-state record with a heading-order contract | minimum | setup |
 | `templates/OUTBOX.md` | a role's outgoing messages (the file is the message) | minimum | setup |
 | `templates/PEER-MESSAGE-PROTOCOL.md` | when and how peers message; trust; delivery | minimum | before the first message |
 | `templates/DECISION-LOG.csv` | the human's rulings (header only) | minimum | setup |
 | `templates/HOLDS.csv` | the holds table: restrictions the human imposed, relayed or direct, with state and release condition (header only; append-only; R3.12) | minimum | setup; every start |
 | `templates/SUBAGENT-BRIEF.md` | a subagent's task, scope, tools and return format | default | before spawning |
 | `templates/JOURNAL.md` | per-session event log for the handoff | default | every session |
-| `templates/STATUS.md` | status rows, automation runs, Thinker log with dispositions | default | Arbiter start |
+| `templates/STATUS.md` | the status ledger (one row per subject, trajectory, queue, unknowns, rulings), automation runs, Thinker log with dispositions | default | Arbiter start |
+| `templates/NOW.md` | the now-file (size guide e.g. 40 lines): current cycle, session start and end, next action per role (the one copy), last full check | default (status knob) | every session start |
+| `templates/CONSOLIDATION.md` | one consolidation in two files: the key file (question set and answer key, in its own sealed folder) and the main file (score, key-literal and adjusted; drop ledger; atom map) | knob: record consolidation | before and after rewriting a drifted record (R5.17, R7.36) |
+| `templates/atom_diff.py`, `test_atom_diff.py` | reference atom-diff tool (numbers, ids, dates and class words present in the old file and absent from the new file and the ledger; stdlib, tests) | knob: record consolidation | consolidation; handoff record gate (R5.7, R5.17) |
 | `templates/OPERATOR-FOLDER-HANDOFF.md` | per-work-folder handoff and next-session prompt | default | Operator handoff |
 | `templates/MEMORY-ENTRY.md` | a persistent behavior rule | default | after a correction from the human |
 | `templates/BRIEF.md`, `templates/RESPONSE.md` | the Thinker exchange (three core response shapes, plus merge and plan for the investigation knob) | knob: Thinker | writing or answering a brief |
@@ -155,7 +169,11 @@ Worked, filled versions of these files for a small invented project: `examples/m
 | Subagent | a worker spawned by a session for one task; returns `STATUS / OUT / OPEN`, writes detail to files (R6.3) |
 | Orchestrator mode / direct writer | a session that edits nothing itself and dispatches subagents / one that edits its own files (R10.1) |
 | Handoff file | a role's memory: everything a fresh session of that role needs (R5.1) |
-| Lazy-read markers | `**[history]` lead-ins that let a start read only current blocks (R5.2) |
+| Current-state record; event record | a record with one row per subject, edited in place (status ledger, handoff, now-file, knowledge records); a record that is the event itself (test record, log, journal, frozen record) and is never consolidated (R5.16) |
+| Trajectory | a table of dated flips (from → to, cause, pointer) kept inside a current-state record (R5.16) |
+| Drop ledger; atom map; atom diff | the three records of a consolidation: where each dropped item went, where each class word and proof pointer went, and the mechanical list of old dates, numbers, class words and ids found nowhere (R5.17) |
+| Reverse-read | a blind test of a rewritten record: questions and key written from the old file and sealed first, fresh readers of old and new, a separate scorer (R7.36) |
+| Lazy-read markers (legacy) | `**[history]` lead-ins of v1.3 that let a start read only current blocks; a legacy form kept until the file is consolidated (R5.3) |
 | Take stock | the start's gather-only survey of new input, cheap wins, ready items and leads (R5.9) |
 | Write scope; S / W / A / P / R / N | who may write what: stakeholder, write, append-only, propose, read, no-read (R2.1) |
 | Human-readable set | the files the human may open; nothing of a held step goes there (R8.9) |

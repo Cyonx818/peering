@@ -1,32 +1,45 @@
 # <ROLE> handoff: <PROJECT>
 
 <!--
-LAZY-READ CONTRACT (GUIDELINES R5.2, R5.3). This comment is the ONE place the marker grep is defined;
-start and handoff commands read lines 1-20 of this file and run the grep below. Keep it identical.
-- Each section starts with its CURRENT block.
-- Superseded blocks follow, each opened by a bold lead-in that STARTS with the token [history]:
-    **[history] In flight, end of session 6.**
-  The word "history" anywhere else (e.g. **Git history check**) is not a marker.
-- The previous session's header becomes **[history] Session <n-1> header.** and moves below the new header.
-- Marker grep (shell, POSIX):  grep -n -e '^## ' -e '^\*\*\[history\]' <this file>
-  Claude Code Grep tool (ripgrep): pattern  ^## |^\*\*\[history\]
-- Read each section with offset/limit down to its first **[history] line. Never delete history.
-- Grep returns only "## " lines although history exists, or nothing: markers are broken. Read header
-  and §7 by heading, never the whole file, and tell the human.
+CURRENT-STATE CONTRACT (GUIDELINES R5.2, R5.3, R5.16). This file holds CURRENT rows only.
+- A handoff writer edits rows in place. It adds no new header block, no dated section and no [history] block.
+- The previous version is recoverable: `git show <commit>:<path>`, the commit named in the Record line below.
+- Section numbers §0-§10 are this template's; commands cite them.
+- Heading-order check (shell, POSIX):  grep -n '^## ' <this file>
+  Expected: §0 §1 §2 [§3] [§4] [§5] §6 §7 [§8] [§9] §10   ([ ] = optional; compare on the §<n> token only;
+  a heading without a § token, such as a writer's progress block at the end, is ignored; fenced blocks hold no `## ` lines).
+  The sections present appear in this order and the minimum set (§0 §1 §2 §6 §7 §10) exists. A required heading
+  missing, or any heading out of order: the start stops and tells the human "handoff structure broken: <heading>"
+  and reads header and §7 by heading only. A deleted optional section is not a failure.
+- Read with offset/limit by heading: header, §0, §1, §2, §7 down to its "### Trajectory" heading. Never the whole file.
+- LEGACY FORM (a v1.3 file not yet consolidated, R5.3; delete these three lines in a new file): a file may keep
+  **[history]** lead-ins as a reading aid (grep -c '^\*\*\[history\]' <file> above 0 = legacy; the start reads each
+  section down to its first **[history] line) and is listed for consolidation (R5.17).
 -->
 <!-- Lines tagged KNOB are optional; see GUIDELINES §15. Minimum file: Header, §0, §1, §2, §6, §7, §10. -->
 
-**Session <n> header.** End of session <n>, <YYYY-MM-DD>. <One paragraph: what changed, what we now know that we did not, the single next action.>
+**Record:** status <current / consolidating>; current as of <YYYY-MM-DD>; old version at `<commit>:<path>` (or "none: new file"); drop ledger `<path or "none">` (R5.17).
 
-**Wired this session:** <item → surface (commit)>. **Open wire-in:** <item → surface, owner>. (Write "none" explicitly; R5.15.)
+**Session state** (one row each, overwritten at every handoff; R5.16)
 
-**[history] Session <n-1> header.** <…>
+| Item | Current |
+|---|---|
+| Last session end | in `<now file>` <!-- KNOB: status file; the now-file is the one record. Without it: session <n>, <YYYY-MM-DD>; HEAD before the handoff commit (= §1 row 6) `<short hash>` --> |
+| What changed, what we now know (next action: §7) | <one paragraph> |
+| Checks at that end | <repo checks, tests, integrity: result> |
+| Wired this session | <item → surface (commit)>, or "none" (R5.15) |
+| Running work | <live subagents (id, task, output path, checkpoint), uncommitted files, or "none"> |
+
+**Open wire-in** (R5.15; "none" is valid, written as one line)
+
+| Item | Target surface | Owner | State |
+|---|---|---|---|
 
 ## §0 Orientation and peers
 
 <What this role is (one line; link the charter). How it relates to the other roles. Role id or instance id (R1.11).>
 
-**Peer state at the end of session <n> (<date>).**
+**Peers (current as of <date>).**
 
 | Name (set by the human) | Role / instance | Harness id at last contact | State | Handoff file / last commit |
 |---|---|---|---|---|
@@ -34,15 +47,13 @@ start and handoff commands read lines 1-20 of this file and run the grep below. 
 
 Messages: my outbox `peers/outbox-<role>.md`. Open items sent by me (not done): <M-ids or "none">. Items acked by me this session: <M-ids or "none">.
 
-**[history] Peer state at the end of session <n-1>.** <…>
-
 ## §1 Start-of-session checklist
 
 | # | Step | Detail |
 |---|---|---|
 | 1 | Integrity <!-- KNOB: source-of-truth integrity --> | `<hash command>` = `<expected>`; frozen manifest check |
-| 2 | Read this file, current blocks only | lazy-read contract above |
-| 3 | Status slice <!-- KNOB: status file --> | rows State / Commit / Next action |
+| 2 | Read this file by heading order | contract above; stop if the heading check fails |
+| 3 | Now-file <!-- KNOB: status file --> | `<now file>` (size guide `<40>` lines): current cycle, next action per role, last session end |
 | 4 | Lease and peers | `commit_paths.py lease <role> --name <name>`; agent list; open outbox items addressed to me |
 | 5 | Pending blinded steps <!-- KNOB: blinding --> | `<pending-blinded-steps file>` (values-free) |
 | 6 | HEAD before the handoff commit | `<short hash>` |
@@ -63,14 +74,16 @@ Messages: my outbox `peers/outbox-<role>.md`. Open items sent by me (not done): 
 
 ## §4 State of knowledge
 
-| Claim | Class | Proof (commit / record) | Scope |
-|---|---|---|---|
+A pointer map (R5.16): the class of each subject lives in the status ledger, not here.
+
+| Subject | Pointer (ledger row / record) |
+|---|---|
 
 <!-- During a held step: no class change for a held family is written here until release (R8.4). -->
 
 ## §5 Leads
 
-| Lead | Source | Class | Next test |
+| Lead | Source | Ledger row (the class lives there, R5.16) | Next test |
 |---|---|---|---|
 
 ## §6 ON HOLD
@@ -84,7 +97,7 @@ Open rows of the holds table `<holds table>` (R3.12); the table is the record an
 
 ## §7 Next action and ranking
 
-**Next action:** <one action>; first concrete step: <…>
+**Next action:** in `<now file>`, row <role-id> (the one copy, R5.16) <!-- KNOB: status file. Without a now-file, write it here: <one action>; first concrete step: <…> -->
 
 | Rank | Item | Value (what it unblocks) | Human effort (what it buys, why this many) | Cost |
 |---|---|---|---|---|
@@ -93,7 +106,12 @@ Open rows of the holds table `<holds table>` (R3.12); the table is the record an
 
 **In flight:** pre-registered not run: <…> · awaiting scoring: <…> · sealed unopened: <…> · briefs without response: <…> · uncommitted: <…> · outbox items not done: <M-ids> · live subagents: <id, task, output path, checkpoint>
 
-**[history] Ranking, end of session <n-1>.** <…>
+### Trajectory
+
+Role-internal flips only (ranking, approach, working agreement), each a move of value, class, scope, direction or decision (R5.16); a subject's value or class flip goes to the status ledger's trajectory and is pointed to, not copied. A row stays while it still bears on reading this file.
+
+| Date | Subject | From → to | Cause | Verdict | Pointer |
+|---|---|---|---|---|---|
 
 ## §8 Side folders and instances <!-- KNOB: several roles or instances -->
 
@@ -104,9 +122,11 @@ Open rows of the holds table `<holds table>` (R3.12); the table is the record an
 
 | Need | Path |
 |---|---|
+| Last consolidation record and drop ledger (kept by later handoffs) | `<path>` @ `<commit>` |
 
 ## §10 Review & corrections
 
+A row only for a correction or review finding that still bears on how this file is read; otherwise the handoff commit body is the record (R5.10).
+
 | Review | Finding | Applied |
 |---|---|---|
-| Handoff writer, end of session <n> (<date>) | handoff brought current from the journal and the fact list | <sections touched; HEAD recorded>. Not re-run by the writer (no shell): <items cited as given, or "none"> (R5.10) |

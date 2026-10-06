@@ -33,9 +33,11 @@ File: `response-<YYYY-MM-DD>-<topic>.md` (same date and topic as the brief)
 | 1 | | | | | C / H / M / L |
 
 ### Shape C: specification
-| # | Decision (not an option) | Acceptance test (numeric) | Dose and noise model | Why |
-|---|---|---|---|---|
-| 1 | | | | |
+| # | Decision (not an option) | Acceptance test (numeric) | Dose and noise model | Why | Kill test (the check that would show it wrong; R4.9) |
+|---|---|---|---|---|---|
+| 1 | | | | | |
+
+For a design or method answer in any shape, add one line: **Kill test:** <the check that would show the design wrong>. A recommendation without one is a hypothesis to test, not a design to adopt (R4.9).
 
 ### Shape D: merge <!-- KNOB: investigation (R7.19) -->
 Clusters (5–8 hypotheses, each one sentence a ranker can put a probability on) · is / is-not test per hypothesis · mandatory slots (can't-miss, measurement artifact, subject adaptation, reference artifact, catch-all; `slot-fill` / `unfilled`) · evidence matrix (consistent / inconsistent / neutral; credibility; shared-source marks) · key evidence item · most diagnostic untested comparison · causal diagram per comparison · clusters only the merger produced (dependence signal). The ranker part carries no author names, cluster sizes or counts.

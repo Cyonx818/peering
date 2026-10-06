@@ -60,6 +60,9 @@ Start reads: <list, with sections; target bytes / tokens per R6.6>. Do not read:
 5. Operator: applied advice follows R9.13 (a rung on the advice ladder and a source per value), R9.14 (packages: levers, signatures, backout order), R9.15 (the human's names), R9.16 (the human's report before any number), R9.17 (the waiting human gets the answer first; the prediction commit is the next tool call of the same turn), R7.28, R7.32, R7.34 and R7.35, whatever the evidence knob says.
 6. Every role: a hold relayed by a peer binds at once, only restricts, is recorded in the holds table as `held (relayed, unconfirmed)`, confirmed with the human, and released only by the human's own words (R3.12).
 7. Arbiter: every decision-log row carries `quote_fidelity`; a row below `verbatim` is a lead until the human confirms it (R7.31).
+8. Thinker <!-- KNOB: Thinker -->: the reader outside the pipeline (frames, conflicts and method); a design or method answer names its kill test (R4.9); restating the brief is the common failure.
+9. Operator: range-check every value before the human sees it, before the prediction commit; a pinned lever is named as pinned (R9.18). Operator: a delivered datum that fails an integrity check is read by nobody until ruled on; only a decision-log standing exception applies, and never to a held, uncataloged or identity-mismatched datum (R10.10).
+10. Every role: stop a subagent once its report is in and check its write paths are unchanged (R6.14); never post or write to anyone outside the project, draft it for the human (R12.2).
 
 ## Must not
 - <e.g. brief the Thinker directly; see blinded outcomes; edit governance>
