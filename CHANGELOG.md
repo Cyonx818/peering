@@ -2,6 +2,78 @@
 
 Rule ids are stable: v1.0 ids keep their number (their text may change, as listed here); new rules are appended within their section. Finding ids refer to each version's review-panel disposition table, kept with the maintainers' development records (not published).
 
+## v1.5 (2026-10-14)
+
+Produced from a fourth exchange with the source project's sessions: the gap analysis of what the source project learned between 2026-10-06 and 2026-10-13 (58 learnings: 14 covered, 27 partial, 17 missing), the reverse analysis's "where the source project is ahead" list (items A1–A13, merged with the first list where they overlap), and the Operator and Thinker lessons files. Applied by one writer, then run through the five-seat review panel (R7.16; see "Review panel (R7.16)" below). Keyed to appendix incidents #59–#69 (new in this version). No existing rule id was renumbered or moved. Every conservative call and skipped item is listed in the maintainers' development records (not published).
+
+### Upgrading from v1.4
+Nothing is breaking. The full steps are in `README.md` § "Upgrading from v1.4"; in short:
+1. Copy the two new templates if their trigger has happened: `CODEBOOK.md` (scoring free-text reports) and `BLIND-INFERENCE-ROUND.md` (the new knob "Blind report inference").
+2. Re-copy the changed templates, by knob, and carry over your filled placeholders. Everyone: `START-COMMAND.md` (standing-rules rows), `ROLE-CHARTER.md` (rules 11–12, reset line), `HANDOFF-COMMAND.md`, `PROJECT-INSTRUCTIONS.md`, `STRUCTURE.md`, `WRITE-SCOPES.md`, `SUBAGENT-BRIEF.md`. Thinker: `BRIEF.md`, `RESPONSE.md`, `THINKER-HANDOFF.md`. Evidence: `PREREGISTRATION.md`, `REVIEW-REPORT.md`, `DATA-STATUS-LEDGER.md`. Applied-work discipline: `OPERATOR-FOLDER-HANDOFF.md`.
+3. Add the count-only pass and selection-rule check to every pre-registration not yet sealed (R7.37, R7.38); give applied-work reviews the whole-subject sweep (R6.13 scope); move mechanical jobs to tested scripts (R6.15); move a blind round's words and prediction files outside the working tree and check the analyst's staged inputs by content (R8.18).
+4. Wire in closed designs (R5.18) and give a promotion row both run hashes (R2.13).
+5. `commit_paths.py` and `atom_diff.py` are unchanged; their tests (the 23 helper tests and the atom-diff tests) still apply.
+6. **Your part (the human).** Nothing unless you turn on blind report inference; then about two minutes per round to mark at most five cells. Asks now end with a "not needed" line; Thinker questions to you state the decision they unlock and fit in about a minute.
+
+### New rules (appended within their sections; 15)
+- R4.15 rank the questions before the research (#67).
+- R5.18 a failed premise closes its design in the record (#61).
+- R6.15 scripts for mechanical jobs; R6.16 produce only what a decision uses (#65).
+- R7.37 count before you register (#59); R7.38 check every selection rule against the effect (#60); R7.39 two predictions, two scores; R7.40 coding free-text reports (#63); R7.41 inter-coder agreement on a fresh sample (#63); R7.42 vet a model version before it drives blind predictions, and gate it twice (#64); R7.43 state the unit of every ranking and rate (#62).
+- R8.18 blind inference of the human's report (#66).
+- R9.19 stop rule for iterative applied work; R9.20 measure in chosen contexts, build for the use (#69); R9.21 package guards are margins with valence.
+
+### Amended rules (ids unchanged; 25)
+- R2.13: objective promotion trigger (same hash on two work items and a passing test); the promotion commit adds the registry row.
+- R3.10: search the record before a test on a peer's lead (#68); now with a Why line.
+- R4.1 and R4.2: a review request may be a message naming a committed artifact at its hash; only the Arbiter sends it, and it carries no grants or folder override.
+- R4.4: one response per committed input.
+- R4.6: only a committed brief file may name single files in a folder the Thinker does not read by default, after a held-ids pre-scan of 0.
+- R4.9: audit answer is a ranked table naming the rule or practice each change replaces (or "new"), with a "deliberately left out" list.
+- R4.14: a human item carries the decision it unlocks and a one-minute bound; relayed answers committed verbatim; a grant is re-checked against the held list.
+- R5.15: read each peer's open wire-in table directly; a closed design is a wire-in row.
+- R6.1: mechanical jobs go to a script.
+- R6.9: reset on context fraction; the brief count is a fallback and a Thinker freshness cap (provisional).
+- R6.11: allowed inputs checked for current-round contamination; a parent review is staged only redacted; staging is run by a role with a shell.
+- R6.13: scoped to project-claim reviews; in applied work every review sweeps the whole subject.
+- R7.2: an actor's operating point is measured and cited.
+- R7.3: a fit-set pre-registration confirms only on data recorded after its second commit.
+- R7.7: a written disposition for every Critical or High (applied / applied with change / moot / declined).
+- R7.12: a count-only pass is "adjacent", not spent; per-arm counts under a confounded rule are "exposed".
+- R7.14: a deterministic actor's run-to-run change is state.
+- R7.23: a fit-set pre-registration is a leakage control, never a confirmation.
+- R7.32: unchanged-configuration repeats logged as pairs.
+- R9.1: efficient design first; floor and cap with basis; counted unit with overhead; lighter keep standard for applied calls; a "not needed" line in every ask.
+- R9.5: find the human's inputs yourself; file-name quirks.
+- R9.14: a package fixes every problem found (problem defined), judged as a whole; a keep by report is progress; package guards listed.
+- R9.16: either order of report and analysis allowed.
+- R10.1: the outputs of a registered, tested script run by the orchestrator are excepted.
+
+### Fixes to rules that looked wrong (B §5)
+- W1 R6.13 scoped (evidence: the human's complaint, an adopted loop design, a review High); W2 R4.1 / R4.2 allow the message form (three of five requests, citation chain held); W3 R6.9 resets on context, not on a count (one session carried five exchanges small; marked provisional in the rule, with an optional Thinker freshness cap); W4 R6.1 sends mechanical jobs to scripts (the human's ruling). All four amended; none left open.
+
+### Templates
+- New: `CODEBOOK.md`, `BLIND-INFERENCE-ROUND.md`.
+- Changed: `PREREGISTRATION.md` (count-only pass with the proxy branch, selection-rule check, actor operating point in §B; fit-set commits in §H); `REVIEW-REPORT.md` (disposition footer; unit checklist; codebook and model-version checklist; delete checklists that do not apply); `BRIEF.md` (message-form note; ranked research questions); `RESPONSE.md` (audit shape; message request in the header); `HANDOFF-COMMAND.md` (peer wire-in tables read directly; closed-design row; message requests paired); `THINKER-HANDOFF.md` (closed designs); `STRUCTURE.md` (§3b promotion-runs column; two placement rows); `WRITE-SCOPES.md` (round files split into sealed, in-tree and coded-data rows; footnote 21); `PROJECT-INSTRUCTIONS.md` (scripts, search-the-record and guard sentences; "not needed" line); `OPERATOR-FOLDER-HANDOFF.md` (loop state, unused-metric counter, "not needed" line); `START-COMMAND.md` (standing rules for the new action-time rules; message requests); `ROLE-CHARTER.md` (reset line; rules 11–12); `SUBAGENT-BRIEF.md` (scripts and blind-analyst constraints); `DATA-STATUS-LEDGER.md` (count-only passes); `CONSOLIDATION.md` and `PANEL-BRIEF.md` (small).
+- `commit_paths.py`, `atom_diff.py` and their tests: unchanged.
+
+### §13 and §15
+- §13 gains six rows (verdict fixed by the counts, filter against the effect, blind analyst with a readable answer, reliability on the tuning sample, unit artifact, the question sets the scope). §15 gains the knob "Blind report inference" and updates the "Pre-registration" and "Applied-work discipline" rows.
+
+### Appendix
+- Incidents #59–#69, each cited by date and commit; lesson 11 added. "Source project" throughout; no source-project outcomes in #60, #62, #64.
+
+### Review panel (R7.16; `reviews/v1.5/`)
+Five seats (architect, agentic, usability, security, writing) reviewed the applied v1.5; 90 findings (C 0, H 13, M 41, L 36 by seat count); all dispositions in `reviews/v1.5/DISPOSITION.md`. The Arbiter ruled ten cross-seat questions; the changes:
+- **Blind report inference (R8.18, R7.39, `BLIND-INFERENCE-ROUND.md`, `CODEBOOK.md`):** the words and prediction files live outside the working tree with only their sha256 committed; the analyst gets a redacted parent review checked by a content-token grep; each cell has a value-free claim line shown and marked first and a basis line revealed after; a fixed committed open prompt; the human marks each cell (named / partly / missed / "can't say", defined; "can't say" excluded from the hit rate and logged); no default scoring time (the human ruled 2026-10-14: a project states one only if a proven problem calls for it; the general principle is at R9.1). The "can't say" value is confirmed by the human (2026-10-14). CODEBOOK gains a coder sheet, a coded-output CSV schema, a prior cut-off and a draw record; R7.41 scores are provisional until the first agreement check.
+- **R7.37:** a proxy-count branch for prospective tests (count on the closest existing data; else "no proxy" with a pre-written support-refusal outcome).
+- **R7.23 vs R7.3 / R7.29:** the stricter reading is an explicit exception in both rules and in the PREREGISTRATION template.
+- **Knob precedence:** a rule-level knob tag wins over its section's knob for the named leak controls (exception paragraphs in §7 and §8; the §15 table "On whatever the knobs say"; the top of GUIDELINES).
+- **Message-form requests (R4.1, R4.6):** only the Arbiter; no grants or folder overrides; an override needs a committed brief and a held-ids pre-scan of 0.
+- **Standing rules:** the new action-time rules are cited in START-COMMAND, ROLE-CHARTER and SUBAGENT-BRIEF (R5.15).
+- **W3:** R6.9 marked provisional with a Why line and an optional freshness cap.
+- **README:** the human's job table lists the new duties; the upgrade section has a "Your part" paragraph and tiered re-copy steps.
+
 ## v1.4 (2026-10-06)
 
 Produced from a third exchange with the source project's sessions: the gap analysis of what the source project learned in its tenth session (75 learnings: 18 covered, 36 partial, 21 missing), the "where the source project is ahead" list of the reverse analysis (items A1–A7), and the Operator and Thinker lessons files. Applied by one writer, then run through the five-seat review panel (R7.16; see "Review panel (R7.16)" below). Keyed to appendix incidents #47–#58 (new in this version). No existing rule id was renumbered or moved. Every conservative call and skipped item is listed in the maintainers' development records (not published).
@@ -120,7 +192,7 @@ Produced from a two-way exchange with the source project's sessions: the gap ana
 - New R8.15 value-free commit subjects for every scored result (R8.4 now points to it; R8.7 gains a `metadata` channel); R8.16 clearance enforced by the tools, fail closed.
 - R4.11 and R8.10: read lists name exact lines, and readers use `git log --format=%h`.
 - New R10.8 pin snapshots, not live shared tools, and pins retire with their test; R10.5 amended. §15 "Pinned tools" corrected (the high-risk cell no longer freezes every tool that touches records).
-- New R10.9 destroying raw data: catalogue first, the human runs the delete; `settings-permissions.json` gets an `rm` deny placeholder.
+- New R10.9 destroying raw data: catalog first, the human runs the delete; `settings-permissions.json` gets an `rm` deny placeholder.
 
 ### Wire-in and voice (incidents #25, #32, #34)
 - New R5.15 done means wired in: wire-in table, "Wired this session" and "Open wire-in" in every handoff, verified by R5.7; handoff and start templates updated (Arbiter handoff steps renumbered: wire-in is new step 4, so old steps 4–10 are now 5–11; Operator wire-in is new step 3, old 3–9 are now 4–10; Thinker wire-in is new step 3, old 3–7 are now 4–8).

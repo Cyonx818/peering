@@ -18,6 +18,9 @@
 ## Open wire-in
 <item → surface, owner (or "none"; R5.15)>
 
+## Closed designs awaiting the record (R5.18)
+<design, failed premise, evidence commit, what would reopen it → ledger row of the subject, owner Arbiter; or "none">
+
 ## Exposure summary
 <one line; pointer to `exposure/thinker.md` rows #…>
 

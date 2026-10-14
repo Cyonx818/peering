@@ -1,4 +1,4 @@
-# Peering: a framework for multi-session human–AI peer collaboration (v1.4)
+# Peering: a framework for multi-session human–AI peer collaboration (v1.5)
 
 ## What this is
 
@@ -23,10 +23,10 @@ The framework was extracted from a long-running research project (`appendix-work
 | | What |
 |---|---|
 | **Do** | Start each session with its start command and end it with the handoff command. Name each session when reminded (Claude Code: `/rename`). Push when you choose (sessions never push). Relay "check your inbox" between sessions only if your harness has no cross-session messaging. Run the guarded delete script yourself when raw data must go (R10.9, knob: data intake). |
-| **Say** | Rulings when a session asks (each becomes a decision-log row with your words; you see the new row ids in every Arbiter handoff report). Facts you changed (silence means no change, R9.3). Names for things you save (R9.4). A side task for the Thinker in the Thinker's own chat (R4.12). Whether you want a scored test on your own work; the default is informal (R9.9). Your own report on a change before you see its numbers (R9.16). "Confirm or correct" on a ruling recorded from someone else's wording, and "confirm" on a hold a peer relayed (R7.31, R3.12). Answers to the Thinker's few one-choice questions when a brief allows them (R4.14, knob). One raw sample of a format when a tool needs it (R7.34). Once, a standing permission to rename and register files you deliver (R2.11, knob: data intake). |
-| **Decide** | Goals and scope. Which item to do next after each start report. Every ask on your time (each states what it buys). Method disputes. Lifting a seal (R8.11). Which session continues if two of one role are open (R1.8). A deputy if the Arbiter is lost (R1.7). When a held or `deferred` item may start: only your own words release a hold, even one a peer relayed (R3.12). |
+| **Say** | Rulings when a session asks (each becomes a decision-log row with your words; you see the new row ids in every Arbiter handoff report). Facts you changed (silence means no change, R9.3). Names for things you save (R9.4). A side task for the Thinker in the Thinker's own chat (R4.12). Whether you want a scored test on your own work; the default is informal (R9.9). Your own report on a change before you see its numbers, and whether you report first or after the blind analysis is committed (R9.16). Knob blind report inference: your own mark on each blind cell (named / partly / missed / can't say), from its claim line alone, before you see any number (R8.18). "Confirm or correct" on a ruling recorded from someone else's wording, and "confirm" on a hold a peer relayed (R7.31, R3.12). Answers to the Thinker's few one-choice questions when a brief allows them (R4.14, knob). One raw sample of a format when a tool needs it (R7.34). Once, a standing permission to rename and register files you deliver (R2.11, knob: data intake). |
+| **Decide** | Goals and scope. Which item to do next after each start report. Every ask on your time (each states what it buys). Method disputes. Lifting a seal (R8.11). Which session continues if two of one role are open (R1.8). A deputy if the Arbiter is lost (R1.7). When an iterative loop stops: you may end it at any time, and a session tells you when it sees nothing left worth trying (R9.19). When a held or `deferred` item may start: only your own words release a hold, even one a peer relayed (R3.12). |
 
-Everything else is the sessions' job. If a session asks you for anything else, R9.5 and R12.1 say it should not. If you are a blinded subject: do not open files outside the human-readable set (R8.9) while a step is held.
+Everything else is the sessions' job. If a session asks you for anything else, R9.5 and R12.1 say it should not (the rows above, including the knob rows, are the whole list). If you are a blinded subject: do not open files outside the human-readable set (R8.9) while a step is held.
 
 ## Harness requirements
 
@@ -82,6 +82,25 @@ Worked, filled versions of these files for a small invented project: `examples/m
 | Scorers are built by agents | scorer built from the pre-registration text, pre-run rulings, one-run definition, pins that retire | R7.23–R7.27, R10.8; `PREREGISTRATION.md` |
 | A protocol or framework needs maximum rigor | the five-seat review panel | R7.16; `PANEL-BRIEF.md`, `REVIEW-REPORT.md` |
 | Two sessions collide on files often | one worktree per role | §15 |
+| The human's subjective report is part of the measure and the session infers it from instrument data | blind report inference: words and prediction files sealed outside the working tree (only their sha256 committed), a redacted parent review, a content-token check, the human marks each blind cell; a codebook scored against base rates. On even when the blinding knob is off | R8.18, R7.39, R7.40, R7.41, R6.11; `BLIND-INFERENCE-ROUND.md`, `CODEBOOK.md` |
+| You score free-text reports of any kind (tickets, comments, the human's notes) and the counts feed a decision, a hit rate or a claim | a codebook with priors and inter-coder agreement on a fresh sample (on whenever such reports are scored; reading reports one by one is not scoring) | R7.40, R7.41; `CODEBOOK.md` |
+| Applied work over several rounds (packages) | already on (§15 applied-work row): the stop rule, chosen measurement contexts, package guards with margin and valence, a use rule for review output; add the loop-state block | R9.19, R9.20, R9.21, R6.16; `OPERATOR-FOLDER-HANDOFF.md` |
+
+## Upgrading from v1.4
+
+v1.5 adds 15 rules and amends 25; nothing is renumbered and nothing is breaking. `commit_paths.py` and `atom_diff.py` are unchanged. In order:
+
+1. **Copy two new templates** (only if their trigger has happened): `templates/CODEBOOK.md` (any scoring of free-text reports, R7.40, R7.41) and `templates/BLIND-INFERENCE-ROUND.md` (the new knob "Blind report inference", R8.18, GUIDELINES §15).
+2. **Re-copy the changed templates, by knob**, and carry over your filled placeholders. For a one-sentence change, paste the sentence instead of re-copying the file.
+   - **Everyone:** `START-COMMAND.md` (new standing-rules rows, R5.15), `ROLE-CHARTER.md` (reset line; rules 11–12), `HANDOFF-COMMAND.md` (read each peer's open wire-in table directly; closed-design wire-in row; message requests paired), `PROJECT-INSTRUCTIONS.md` (rule 7 gains scripts, search-the-record and guard sentences; rule 12 the "not needed" line), `STRUCTURE.md` (§3b promotion-runs column; two placement rows), `WRITE-SCOPES.md` (round-file rows, footnote 21), `SUBAGENT-BRIEF.md` (scripts and blind-analyst constraints).
+   - **Thinker knob:** `BRIEF.md`, `RESPONSE.md` (audit table gains "Rule or practice it replaces" and a "Deliberately left out" list; message requests), `THINKER-HANDOFF.md` (closed designs).
+   - **Evidence knob:** `PREREGISTRATION.md` (count-only pass with the proxy branch, selection-rule check, actor operating point, fit-set commits), `REVIEW-REPORT.md` (disposition footer; unit, codebook and model-version checklists), `DATA-STATUS-LEDGER.md`.
+   - **Applied-work discipline:** `OPERATOR-FOLDER-HANDOFF.md` (loop state, "not needed" line).
+3. **Project-side checks.** Any pre-registration not yet sealed gets the count-only pass (R7.37) and the selection-rule check (R7.38). Applied-work reviews run the whole-subject sweep unprompted (R6.13 is now scoped to project-claim reviews). Mechanical jobs move from judging agents to tested scripts (R6.15). A blind round's words and prediction files move outside the working tree with only their sha256 committed, and the analyst's inputs are checked by content (R8.18, R6.11).
+4. **Wire in:** list each closed design (R5.18) as an open wire-in item until its ledger row says so; a tool's promotion row gets both run hashes (R2.13).
+5. **Your part (the human).** Nothing, unless you turn on blind report inference; then you mark at most <5> cells per round, on a four-value scale (named / partly / missed / can't say) from claim lines alone. You also see: a "not needed" line at the end of every ask (R9.1); Thinker questions that state the decision they unlock and fit in about a minute (R4.14); a stop call when a loop has nothing left worth trying (R9.19).
+
+**What you will notice.** Asks state their floor, cap and counted unit (R9.1). Review output shrinks every few rounds (R6.16). A written disposition for every Critical or High finding (R7.7). Roles reset on a context fraction, not a brief count (R6.9, provisional). A new model version is vetted before it drives blind predictions (R7.42).
 
 ## Upgrading from v1.3
 
@@ -152,6 +171,8 @@ Worked, filled versions of these files for a small invented project: `examples/m
 | `templates/BRIEF.md`, `templates/RESPONSE.md` | the Thinker exchange (three core response shapes, plus merge and plan for the investigation knob) | knob: Thinker | writing or answering a brief |
 | `templates/THINKER-HANDOFF.md`, `templates/KNOWLEDGE-INDEX.md` | the Thinker's handoff and entry point | knob: Thinker | Thinker setup |
 | `templates/PREREGISTRATION.md`, `templates/DATA-STATUS-LEDGER.md` | predictions before data; spent-data status | knob: evidence | before a confirmatory test |
+| `templates/CODEBOOK.md` | a codebook for free-text reports: axes, units and weights, out-of-scope bucket, "unspecified" values, valence, prior table with smoothing, agreement table, uncodable share | knob: blind report inference (also on whenever free-text reports are scored, R7.40, R7.41) | before scoring reports |
+| `templates/BLIND-INFERENCE-ROUND.md` | per-round file set for a blind report inference: sealed words and prediction files, blind cells file (claim and basis lines), the scoring card, score file; who may read which; commit order; audit lines | knob: blind report inference | each round (R8.18) |
 | `templates/PENDING-BLINDED-STEPS.csv`, `templates/PENDING-BLINDED-STEPS.md`, `templates/EXPOSURE-LOG.md` | held steps (values-free): the CSV is the one machine-read record, the Markdown file its human-readable view; per-role exposure files | knob: blinding (machine-read list: knob) | every start while blinding is on |
 | `templates/REVIEW-REPORT.md`, `templates/PANEL-BRIEF.md` | CR / RO reviews; the five-seat panel | default / knob: maximum rigor | reviewing |
 | `templates/AUTOMATION-RUNS.md` | per-job last run and "new since last run" (feeds take-stock); the status file's table is the lighter alternative | knob: automation | Arbiter start (R5.9) |
@@ -202,6 +223,8 @@ Worked, filled versions of these files for a small invented project: `examples/m
 | §V deviation | a block in the affected record disclosing a departure from protocol (R7.10) |
 | ON HOLD | work parked with a release condition: the open rows of the holds table, quoted in handoff §6 |
 | Dose | the amount of work asked of the human, with what it buys and why this many (R9.1) |
+| Blind report inference; codebook; count-only pass | an analyst infers what the human experienced from instrument data while the human's words are physically absent (sealed outside the working tree), and the human marks the cells from claim lines (R8.18); the set of coding axes, priors and agreement table that scores free-text reports (R7.40, R7.41); a count-only run on the data a pre-registration will score, before it is sealed (R7.37) |
+| Package guard | a non-inferiority check on an outcome a package must not worsen, with a margin and an unwanted side (R9.21); not a tool guard that refuses a datum (R8.16) |
 | Quick-reference card | an optional short card of rules and leads the Operator consults during the human's live work; curated by the Arbiter |
 | Research packet | curated excerpts the Arbiter prepares from outside sources for the Thinker (R4.5) |
 | Playbook | the project's method doc for sessions that ask the human to act (walkthrough format, dose) |

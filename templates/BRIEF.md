@@ -10,6 +10,11 @@ File: `brief-<YYYY-MM-DD>-<topic>.md` | Written by: Arbiter | Commit: (quoted in
 ## Why now
 <What result or conflict triggered this brief; what it unblocks.>
 
+<!-- The message form (R4.1) uses no brief file: the Arbiter sends a message naming one committed artifact @ hash, with no grants and no folder override, and the author-side blinding check result in the message; see the RESPONSE header. This file is the file form. -->
+
+## Research questions, ranked by decision impact <!-- KNOB: Thinker; design briefs (R4.15) -->
+<In a round-1 design brief the Thinker returns this list in its knowledge list; fill this section only when the Arbiter already has it. The questions the design needs answered, each tagged by source (record / outside research / the human) and ranked by how much a different answer would change the design. Research runs in this order; results are read by pointer, never whole.>
+
 ## Response shape
 <hypotheses | audit | specification | merge | plan> (RESPONSE.md, R4.9)
 
@@ -17,9 +22,9 @@ answer: <path, only if outside the Thinker's folder (R4.4)>
 round: <design briefs only: 1 (knowledge list + outline) / 2 (design against packet `<path>`) (R4.13)> <!-- KNOB: Thinker -->
 
 ## Questions to the human <!-- KNOB: Thinker (R4.14) -->
-<not allowed | allowed on <topics: goals, acceptability, preferences>, ≤ <n> questions, each answerable in one choice, value-free>
+<not allowed | allowed on <topics: goals, acceptability, preferences>, ≤ <n> questions, each answerable in one choice, value-free; each human item states the decision it unlocks and fits in about one minute (R4.14)>
 Default for a brief on the human's preferences or on method with no held step open: "allowed on the brief's topic, e.g. ≤ <4> questions" (R4.14).
-Held steps: <no held step involves the human (checked on <date> against `<pending list>`) | held steps <ids> are named here and must not be touched>. A grant without this line is void. Thinker's exposure rows for a family with a pending step: <none | rows; then every question and option text is written in this brief and checked by an unexposed reader>. While any held step is open, the Arbiter screens every question and option text before the human sees it (R4.14, R8.10).
+Held steps: <no held step involves the human (checked on <date> against `<pending list>` at held-list commit `<hash>` and holds-table commit `<hash>`; the Thinker re-reads the held-ids count before each question, and a step that opens voids the grant) | held steps <ids> are named here and must not be touched>. A grant without this line is void. Thinker's exposure rows for a family with a pending step: <none | rows; then every question and option text is written in this brief and checked by an unexposed reader>. While any held step is open, the Arbiter screens every question and option text before the human sees it (R4.14, R8.10).
 
 ## Read (pointers only, in order)
 | File | Section | Why |

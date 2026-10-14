@@ -44,7 +44,7 @@ Full matrix: `<path to WRITE-SCOPES>`.
 | Why this model | <capability, cost, or independent error modes from the other roles> |
 
 ## Context budget
-Start reads: <list, with sections; target bytes / tokens per R6.6>. Do not read: <list>. Subagent returns: R6.3 format, ≤ <N> lines. Reset after: <N briefs / cycles, or context fraction> (R6.9).
+Start reads: <list, with sections; target bytes / tokens per R6.6>. Do not read: <list>. Subagent returns: R6.3 format, ≤ <N> lines. Reset after: context fraction <f> (how measured: <harness indicator>; default the R5.13 headroom); fallback when the harness shows none, and for a Thinker an optional freshness cap: <N briefs or cycles> (R6.9, provisional).
 
 ## Session lifecycle
 - Start: `<start command> [<args>]` (reports, then waits)
@@ -63,6 +63,8 @@ Start reads: <list, with sections; target bytes / tokens per R6.6>. Do not read:
 8. Thinker <!-- KNOB: Thinker -->: the reader outside the pipeline (frames, conflicts and method); a design or method answer names its kill test (R4.9); restating the brief is the common failure.
 9. Operator: range-check every value before the human sees it, before the prediction commit; a pinned lever is named as pinned (R9.18). Operator: a delivered datum that fails an integrity check is read by nobody until ruled on; only a decision-log standing exception applies, and never to a held, uncataloged or identity-mismatched datum (R10.10).
 10. Every role: stop a subagent once its report is in and check its write paths are unchanged (R6.14); never post or write to anyone outside the project, draft it for the human (R12.2).
+11. Every role: before a test or prediction on a peer's lead, search the status ledger, quick-reference card and knowledge index and say what is on file (R3.10); mechanical jobs go to tested scripts, and a role without a shell asks its spawner (R6.15); every ranking or rate that feeds a decision states its unit (R7.43).
+12. Operator: every ask ends with a "not needed" line (R9.1); iterative applied work says stop when the stop rule holds in every measurement context, and each package guard has a margin and an unwanted side (R9.19, R9.21). Arbiter <!-- KNOB: evidence -->: no pre-registration is sealed before the count-only pass (or "proxy counts" / "no proxy") and the selection-rule check (R7.37, R7.38). Arbiter, Thinker: a message-form request comes only from the Arbiter and carries no grant or folder override (R4.1, R4.6). Operator <!-- KNOB: blind report inference -->: the round's words and prediction files stay sealed outside the tree and the human marks each cell from claim lines alone (R8.18).
 
 ## Must not
 - <e.g. brief the Thinker directly; see blinded outcomes; edit governance>

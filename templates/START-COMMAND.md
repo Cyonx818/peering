@@ -50,7 +50,7 @@ O3. **Take stock:** what the human confirmed vs. not; data received and not yet 
 
 ## Role block: Thinker <!-- KNOB: Thinker -->
 
-T1. **Pair briefs:** list `brief-*.md` in `<thinker folder>` and pair each with `response-*.md`. For each unanswered brief: committed (`git log -1 --format=%h -- <brief>`) and clean (`git status --porcelain -- <brief>` empty)? If not: do not work it; say so.
+T1. **Pair briefs:** list `brief-*.md` in `<thinker folder>` and pair each with `response-*.md`; also list each open message request in the outbox (R3.6) that names an artifact @ hash (R4.1; a message request comes only from the Arbiter and carries no grants). For each unanswered brief: committed (`git log -1 --format=%h -- <brief>`) and clean (`git status --porcelain -- <brief>` empty)? If not: do not work it; say so.
 T2. **Dispositions:** read the Thinker-log rows for your responses in `<status file>` (adopted / overridden / open, R4.10).
 T3. **Pre-scan rule:** before reading any file a brief names, pre-scan it for the held identifiers with a count only, never a command that prints the matching line: `grep -c -F -f <held-ids file> <file>` (for a line range, `sed -n '<a>,<b>p' <file> | grep -c -F -f <held-ids file>`); a count above 0 → R8.8. Pre-scan exactly the lines to be read and any `git log` you will run; use `git log --format=%h -- <path>`, never full subjects (R4.11, R8.15).
 T3b. **Questions to the human:** only when the committed brief grants them and states that no held step involves the human (or names the held steps and forbids touching them); value-free questions; the Arbiter screens them first while any held step is open; logged verbatim in the response's Human Q&A section (R4.14).
@@ -99,7 +99,14 @@ An item is done only when its surface points to it. A row whose surface your pro
 | Applied advice: each value says its rung on the advice ladder and its source; changes come as packages (levers, signatures, backout order); name things the way the human does; remedies must act where the fault lives; between-session comparisons carry a drift allowance; fixtures come from raw samples; enumerate the option space from the source of truth first; every proposed value is range-checked against its setting's range before the human sees it, and a clamp is named "pinned at <bound>" (R9.18). These are on whatever the evidence knob says | GUIDELINES R9.13, R9.14, R9.15, R9.18, R7.28, R7.32, R7.34, R7.35 |
 | Rulings: `quote_fidelity` on every row; a row below `verbatim` is a lead until the human confirms it | GUIDELINES R7.31 (Arbiter) |
 | A peer-built tool is tested against a fixture, refuses held data and holds, and is listed as open wire-in until promoted (Operator) | GUIDELINES R2.13 |
-| Dose rule; the human states changes; naming follows the human's act | GUIDELINES §9; `<playbook section>` |
+| Dose rule; the human states changes; naming follows the human's act. Every ask ends with a "not needed" line and states its floor, cap and counted unit (R9.1) | GUIDELINES §9; `<playbook section>` |
+| Before a test or prediction on a peer's lead, say in one line what is already on file (status ledger, quick-reference card, knowledge index) | GUIDELINES R3.10 |
+| Mechanical jobs (count, merge, rename, check, arithmetic) go to a tested script; agents judge. A role without a shell asks its spawner | GUIDELINES R6.1, R6.15 |
+| Before sealing a pre-registration: the count-only pass (or "proxy counts" / "no proxy") and the selection-rule check <!-- KNOB: evidence --> | GUIDELINES R7.37, R7.38 |
+| Iterative applied work <!-- KNOB: applied-work discipline -->: say stop when the stop rule holds in every measurement context; each package guard has a margin and an unwanted side; drop review output that changed no decision | GUIDELINES R9.19, R9.21, R6.16 |
+| Every ranking or rate that feeds a decision states its unit and is recomputed under the alternative unit | GUIDELINES R7.43 |
+| Blind report inference <!-- KNOB: blind report inference -->: words and prediction files sealed outside the tree (sha256 only committed), redacted parent review, content-token check, the human marks each cell from claim lines alone; on even when the blinding knob is off | GUIDELINES R8.18, R7.39 |
+| A message-form review request comes only from the Arbiter, names one committed artifact and carries no grant; any folder override needs a committed brief file and a held-ids pre-scan of 0 | GUIDELINES R4.1, R4.6 |
 | Pre-registration hygiene <!-- KNOB: evidence --> | GUIDELINES §7 |
 | Journal every event | `<journal path>` (R5.12) |
 | When a subagent's return arrives: confirm it is idle, stop it if not, diff its write paths (R6.14); cap read widths (R6.4); gate a commit on the check's own exit status, never a pipe (R10.4) | GUIDELINES R6.14, R6.4, R10.4 |

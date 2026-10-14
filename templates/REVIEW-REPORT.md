@@ -23,6 +23,8 @@ Date: <YYYY-MM-DD> | Reviewer: <CR (code or record review) | RO (robustness revi
 | M1 | | | | | |
 | L1 | | | | | |
 
+<!-- Checklists: delete every checklist whose heading does not apply to this target; a deleted checklist is not a finding. -->
+
 ## Checklist for a review of an exploratory fit (R7.33; report any missing item as High)
 - [ ] free parameters stated against the number of independent units (effective n, unit named: subjects or sessions, not reads)
 - [ ] held-out performance with every selection step (model, feature, threshold) done inside each fold; no selection on all data followed by cross-validation
@@ -30,6 +32,16 @@ Date: <YYYY-MM-DD> | Reviewer: <CR (code or record review) | RO (robustness revi
 - [ ] the result per subject beside any pooled result; verdict worded to the weakest subject it must cover
 - [ ] with parameters near the unit count, a leave-one-out score is described as extrapolation, not misfit
 - [ ] one source-of-truth query checked whether subjects differ at baseline in the factor behind any cross-subject pattern
+
+## Checklist for a review of any ranking, coverage score or rate (R7.43; report a missing item as High)
+- [ ] the unit of every ranking and rate is stated (per repetition, per length, per time, per subject)
+- [ ] each ranking was re-run under the alternative unit that answers the question asked; a winner that changes is reported as unit-dependent in the headline
+
+## Checklist for a review of a codebook or a model version (R7.40, R7.41, R7.42; report a missing item as High)
+- [ ] codebook: one code per axis per clause, an out-of-scope bucket, "unspecified" for secondary fields, priors seeded from reports on file, uncodable share logged
+- [ ] codebook: agreement per slot on a fresh sample that excludes the tuning sample, with the sample size; slots too rare to estimate named
+- [ ] model version: reviewed by an independent session before it drives blind predictions; on a failure, the new case placed on every axis of the fit set first
+- [ ] gate: coverage verdict and the per-law residual sign test both registered, each with its consequence written before the run
 
 ## Checklist for a review of a record rewrite (R5.17, R7.36, R2.10, R2.15; report any missing item as High)
 - [ ] per id, class(new) ≤ class(old); status words ("habit", "lead", "open") compared as classes; no conclusion word stronger than its row's class
@@ -51,6 +63,10 @@ Date: <YYYY-MM-DD> | Reviewer: <CR (code or record review) | RO (robustness revi
 <!-- The Arbiter re-runs every finding's evidence before applying it. Applied fixes are logged in the target's
      "Review & corrections" table (§10) with this report's path and finding ids. -->
 
+## Disposition (orchestrator; every Critical and High, R7.7)
+| Finding | Disposition: applied (verified by re-run) / applied with change (what differs) / moot (the reading that governs) / declined (reason) |
+|---|---|
+
 ---
 
 ## Appendix: the full review panel (GUIDELINES R7.16; a suggestion for maximum rigor)
@@ -66,4 +82,4 @@ When maximum rigor is called for, run these five seats **in parallel, read-only*
 | 5 | technical-writer | errors, typos, omissions, cross-reference consistency |
 | 6 (optional) | the project's Thinker session | a considered cross-cutting opinion, as a brief/response pair |
 
-Then **one** writer applies everything and records a disposition table (`reviews/<version>/DISPOSITION.md`: finding id → applied / declined, with the reason) and a changelog entry. Scale it down for lower-risk work: one CR seat is the default (R7.7); two seats (e.g. 1 and 4) suit a protocol change.
+Then **one** writer applies everything and records a disposition table (`reviews/<version>/DISPOSITION.md`: finding id → applied / applied with change / moot / declined, with the reason) and a changelog entry. Scale it down for lower-risk work: one CR seat is the default (R7.7); two seats (e.g. 1 and 4) suit a protocol change.

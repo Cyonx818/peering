@@ -26,4 +26,4 @@ From: <Arbiter / the human>, <YYYY-MM-DD> | GUIDELINES R7.16 | One copy per seat
 `reviews/<version>/review-<seat>.md` per `templates/REVIEW-REPORT.md` (severity C / H / M / L, counts in the verdict). Return per R6.3: `STATUS`, `OUT`, `OPEN`, then the counts.
 
 ## After the panel
-One writer applies every finding, re-running each finding's evidence first, and records `reviews/<version>/DISPOSITION.md` (finding id → applied / applied with change / declined, with the reason; cross-seat rulings named with the findings they cite; a "For the human" list of decisions that are theirs) and a changelog entry with a "Review panel (R7.16; reviews/<version>/)" subsection.
+One writer applies every finding, re-running each finding's evidence first, and records `reviews/<version>/DISPOSITION.md` (finding id → applied / applied with change / moot / declined, with the reason; cross-seat rulings named with the findings they cite; a "For the human" list of decisions that are theirs) and a changelog entry with a "Review panel (R7.16; reviews/<version>/)" subsection.

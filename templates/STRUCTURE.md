@@ -35,6 +35,8 @@ File: `<structure path>` | Owner: Arbiter | GUIDELINES R2.1–R2.5, R2.12–R2.1
 | pre-run rulings (R7.23) <!-- KNOB: evidence --> | beside the pre-registration's scorer, committed with it | |
 | a fixture from a raw sample the human supplied (R7.34) | `scripts/fixtures/` for a promoted tool; the peer's own folder, beside its tool, before promotion (R2.13); byte for byte, marked "fixtures, not records" | |
 | a peer-built tool, not yet promoted (R2.13) | the peer's own folder until the Arbiter promotes it (then `scripts/`, with a path-map row and a registry row, or a Key commands entry where the registry knob is off) | |
+| a codebook for free-text reports, with its priors and agreement table (R7.40, R7.41) | `<docs>/methods/`, one file per codebook version (owner: Arbiter) | `CODEBOOK.md` |
+| the per-round files of a blind inference of the human's report <!-- KNOB: blind report inference --> (R8.18) | the work item's folder holds the blind cells file and the score file; the words file and the prediction file live in a sealed location outside the working tree with only their sha256 committed until the cells are committed (R8.18); never merged into one file | `BLIND-INFERENCE-ROUND.md` |
 | <…> | <…> | <…> |
 | **no row fits** | **ask the Arbiter; add a row first** | |
 
@@ -44,8 +46,8 @@ File: `<structure path>` | Owner: Arbiter | GUIDELINES R2.1–R2.5, R2.12–R2.1
 <!-- R2.3: a stub stays at the old path while something outside the repository still names it (a shared command repository, memory); `Remove when` states the condition. The repo check lists live stubs and blocks on a dangling one. -->
 
 ## 3b. Tool registry (R2.12) <!-- KNOB: tool registry. In the minimum the rules file's Key commands list is the registry. -->
-| Tool | Command | Status (live / retired) | Tests | Owner role | Pinned? (R10.8) |
-|---|---|---|---|---|---|
+| Tool | Command | Status (live / retired) | Tests | Owner role | Pinned? (R10.8) | Promotion runs (hash 1, hash 2; R2.13) |
+|---|---|---|---|---|---|---|
 
 ## 3c. Record kinds, never-consolidated list and checker exemptions (R5.16, R2.15)
 **Current-state records** (one row per subject, edited in place; may be consolidated): <status ledger, now-file, role handoffs, knowledge records, the human's preference record, indexes>.

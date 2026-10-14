@@ -1,6 +1,6 @@
 # Consolidation record: <record being rewritten>
 
-Two files. **Key file** (Parts 1-2): `<key folder>/<date>-consolidate-<record>-key.md`, in its own sealed folder, never in a folder the rewriter reads or writes. **Main file** (Parts 3-4): `<exploration folder>/<date>-consolidate-<record>.md`, citing the key only by commit and sha256. Written by: <role / subagent ids, one line per part> | GUIDELINES R5.16, R5.17, R7.36, R7.4, R6.11, R2.10
+Two files. **Key file** (Parts 1-2): `<key folder>/<date>-consolidate-<record>-key.md`, in its own sealed folder outside the working tree, never in a folder the rewriter reads or writes. **Main file** (Parts 3-4): `<exploration folder>/<date>-consolidate-<record>.md`, citing the key only by commit and sha256. Written by: <role / subagent ids, one line per part> | GUIDELINES R5.16, R5.17, R7.36, R7.4, R6.11, R2.10
 <!-- A consolidation or restructure of a current-state record (R5.16) is a rewrite, not a compression.
      HOW TO RUN. Form: full for any handoff, the status file, the now-file and any human-readable record; light only for
      small session records outside those (R7.36). Actors: the Arbiter launches four subagents, each staged in a fresh

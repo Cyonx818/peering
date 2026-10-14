@@ -13,7 +13,15 @@
 | <setting / version, named only as the human saved it (R9.4)> | yes / no stated change (R9.3) | <…> |
 
 ## Next step
-<Options with sources; what each buys and why this many (R9.1). The human chooses.>
+<Options with sources; what each buys and why this many (R9.1); floor and cap, each with its basis; the counted unit and its overhead. **Not needed this round:** <what the human need not do> (R9.1). The human chooses.>
+
+## Loop state <!-- KNOB: applied-work discipline (R6.16, R9.19–R9.21; iterative applied work) -->
+| Row | Value |
+|---|---|
+| Unused metrics (R6.16) | <metric → rounds unused (count); updated each round so the drop rule survives a reset> |
+| Loop log | <pointer to the loop log: per round what changed the decision, what was computed and changed nothing (R6.16)> |
+| Stop-call state (R9.19) | <rounds so far; consecutive null rounds from different hypotheses; best remaining lever vs the human's noise at a practical dose; "continue" / "say stop"> |
+| Targets (R9.20) | <exemplars and what they share; not a single liked result as the target> |
 
 ## Protocol that worked
 <steps; walkthrough set size and why>

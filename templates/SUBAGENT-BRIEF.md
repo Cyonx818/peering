@@ -35,6 +35,8 @@ Allowed: <Read, Grep, Glob, Bash(<read-only commands>), Edit/Write on the output
 - Write only in your spawner's voice; never as another role or as the human (R2.10).
 - Scorer builders <!-- KNOB: evidence -->: build only from the pre-registration text; flag gaps, do not resolve them (R7.23).
 - No secrets in the output (R10.7).
+- Mechanical jobs (count, merge, rename, check, arithmetic) are done by a tested script, not by your own reading; a one-off read-only command is recorded with its command line and output (R6.15).
+- Blind analyst <!-- KNOB: blind report inference -->: read only the staged folder (neutral file names, redacted parent review, coder sheet); at most <5> coded cells, each with a value-free claim line and a basis line, one code per axis (R8.18).
 - Blinding <!-- KNOB -->: if this task touches a held step, put no outcome value in your return; return `written: <path> @ <sha256>; values withheld (step <id>)` (R8.5). If you meet an outcome value you were not meant to see: stop, read no further, return `STATUS: blocked` with "exposed: <file>" (R8.8).
 
 ## Return (R6.3)

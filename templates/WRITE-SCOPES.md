@@ -44,6 +44,10 @@ Decided by the human on <YYYY-MM-DD> (decision log `<DEC-id>`). GUIDELINES §2.
 | raw-data catalog and disposal records (R10.9) <!-- KNOB: data intake --> | S | P | N | no |
 | investigation folder `<evidence>/investigations/<date>-<topic>/` <!-- KNOB: investigation --> | S | R¹⁶ | R¹⁷; P (via the Arbiter) | no |
 | investigation ledger `<evidence>/investigations/ledger.csv` <!-- KNOB: investigation --> | S (rows appended, never edited; or "S (fill-once)" where the R7.22 variant is chosen and recorded in the decision log) | R | R | no |
+| codebook files (R7.40, R7.41) <!-- KNOB: blind report inference; or any scoring of free-text reports --> | S | R; P | R | yes |
+| blind-inference round, sealed files: words file, prediction file, kept outside the working tree with only their sha256 committed until the cells are committed (R8.18) <!-- KNOB: blind report inference --> | W⁶ | S²¹ | N | no |
+| blind-inference round, in-tree files: blind cells file (claim lines; basis lines withheld from the human until the score is committed), score file (R8.18) <!-- KNOB: blind report inference --> | W⁶ | S²¹ | R after commit | cells: claim lines only before the score; score: yes |
+| shared coded-data file and coded-output CSVs (R8.18, CODEBOOK §7) <!-- KNOB: blind report inference --> | W⁶ | S²¹ | N | no |
 | tools, tests; commit helper | S | P | R | no |
 | a tool the Operator (or a role whose charter grants it) built in its own folder, with its fixtures, until promoted (R2.13) | R (promotes it) | S | N | no |
 | tool registry <!-- KNOB: tool registry --> | S | P | R | no |
@@ -80,6 +84,7 @@ Decided by the human on <YYYY-MM-DD> (decision log `<DEC-id>`). GUIDELINES §2.
 18. Including the one `answer:` path a committed brief names (R4.4): the brief is the grant, one file only.
 19. The recorded exception to one committer per shared file (R2.7): the holds table is append-only; the role that receives a hold, or the human's confirmation or release, appends its row at once, one helper call per row, after the R2.8 dirty check. Rows are never edited; the latest row per hold id is current; only the human's own words move a hold to `released` (R3.12).
 20. The second recorded exception to one committer per shared file (R2.7): each role edits only its own "next action" row of the now-file at its own handoff (and its "Session start" line at its first write), one helper call, after the R2.8 dirty check; the Arbiter owns the rest and refreshes the Thinker's row from its `HANDOFF.md`. A subagent rewriter (R5.17) has N on the consolidation key file (R7.36).
+21. The words file and the prediction file are separate files kept outside the working tree, with only their sha256 committed until the blind cells are committed (R8.18). The blind analyst is a fresh staged subagent (R6.11) that reads neither; the current round's words enter any shared coded-data file only after the human has scored. The human writes the words and the marks (the Operator transcribes them and does not code); a role that relies on the H column for screening depth (R8.9) treats the cells file as read by the human.
 
 ## Minimum variant (Quick start A: Arbiter + Operator)
 

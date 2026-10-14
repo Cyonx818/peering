@@ -20,6 +20,9 @@ Date: <YYYY-MM-DD> | Author (predictor): <fresh subagent id> | Scorer: <fresh su
 | Outside-fit-set check (R7.29) | <tool, run date, exit code; output path @ commit> |
 | Post-session question to the human (if the human is the subject; R7.26) | <wording; answer classes; consequence of a missing answer> |
 | Derivation chain | <instruments and auxiliary assumptions, each validated (cite) or routed to an offline check (R7.21)> |
+| Count-only pass (R7.37) | <script or counts mode; per cell: samples, passes or subjects surviving every selection rule; histogram of each selection variable; result path @ commit. If the counts already fix the outcome category, do not mint. Data not yet recorded: counts on the closest existing data of the same kind, labeled "proxy counts" (named, outside the fit set where possible); if none exists, "no proxy" and a pre-written support-refusal outcome (what is reported if the real counts fix the category, e.g. "not resolvable"); re-run on the real data before scoring> |
+| Selection-rule check (R7.38) | <per rule: kept count as the quantity of interest grows; confounded with the effect? how paired or modeled> |
+| Actor operating point (R7.2) <!-- KNOB: only if an actor is part of the instrument --> | <where the actor runs relative to the limit; measurement cited (file, n)> |
 
 ## §C Prediction
 | Cell | Predicted value | Tolerance band | Plausible range | Basis (derivation, sources with query / commit) |
@@ -46,7 +49,8 @@ Rivals whose intervals converge in the design's regime make it non-separable: re
 ## §F Dose (human effort)
 | Count asked | What it buys | Spread (source) | Effect to resolve | n required | Asked |
 |---|---|---|---|---|---|
-<!-- No spread known → say so and ask for the smallest pilot. Count blocks, not repetitions, when the subject drifts. -->
+<!-- No spread known → say so and ask for the smallest pilot. Count blocks, not repetitions, when the subject drifts.
+     State the floor and the cap, each with its basis, and the counted unit and its overhead (R9.1); the ask ends with a "not needed" line. -->
 
 ## §G Blinding and exposure <!-- KNOB: blinding -->
 - Predictor's forbidden files: <list>. The predictor's brief carried no outcome values.
@@ -60,6 +64,7 @@ Rivals whose intervals converge in the design's regime make it non-separable: re
 ## §H Locking
 Pre-registration commit: <hash> | Seal commit (if any, direct child, same helper call with `--and`): <hash> | Anchored outside the repo <!-- KNOB: high-risk -->: <where, date> (R7.15)
 Scorer snapshot: `<commit>:<path>` sha256 `<…>` | Pins on shared tools: <none / list, each with its retirement condition> (R10.8)
+Fit-set pre-registration <!-- KNOB: only for a fit-set registration (R7.23) -->: commit 1 (specification and scorer pinned, before the fit data are read): <hash> | commit 2 (fit outputs and predictions recorded): <hash>. Confirmation comes only from data recorded after commit 2 (an exception to R7.3's "old or new": in a fit-set registration the analyst has read the data pool, so age is the only mechanical proof of separation; the R7.29 check compares capture stamps with commit 2).
 
 ## §V Deviations (append only, after commit)
 | Date | Deviation | Effect on result | Verdict under the strict reading (R7.25) |

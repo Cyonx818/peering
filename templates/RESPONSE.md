@@ -7,7 +7,7 @@ File: `response-<YYYY-MM-DD>-<topic>.md` (same date and topic as the brief)
 ## Header
 | Field | Value |
 |---|---|
-| Brief | `brief-<YYYY-MM-DD>-<topic>.md` @ `<commit hash>` (committed and clean when read) |
+| Brief | `brief-<YYYY-MM-DD>-<topic>.md` @ `<commit hash>` (committed and clean when read), or message request `M-<role>-<n>` naming `<artifact>` @ `<hash>`, quoted verbatim here; a message request carries no grant and no folder override (R4.1) |
 | Shape | hypotheses / audit / specification / merge / plan |
 | Files read | `<path>` §<…>; `<path>` §<…> |
 | Reads beyond the brief | none / <query or file>, purpose (R4.6) |
@@ -28,9 +28,12 @@ File: `response-<YYYY-MM-DD>-<topic>.md` (same date and topic as the brief)
 **Rivals and what kills each:** <for the top hypotheses: the rival, the observation that separates them, and by how much.>
 
 ### Shape B: audit
-| # | Defect | Why it matters | Cheapest check | Expected effect if fixed | Severity |
-|---|---|---|---|---|---|
-| 1 | | | | | C / H / M / L |
+| # | Defect or change | Rule or practice it replaces, or "new" | Why it matters | Cheapest check | Expected effect if fixed | Severity |
+|---|---|---|---|---|---|---|
+| 1 | | | | | | C / H / M / L |
+
+**Deliberately left out:** <what is not needed or not to be done, each with its reason; read as carefully as the table (R4.9).>
+
 
 ### Shape C: specification
 | # | Decision (not an option) | Acceptance test (numeric) | Dose and noise model | Why | Kill test (the check that would show it wrong; R4.9) |
