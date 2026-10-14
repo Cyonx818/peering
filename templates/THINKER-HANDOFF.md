@@ -21,6 +21,9 @@
 ## Closed designs awaiting the record (R5.18)
 <design, failed premise, evidence commit, what would reopen it → ledger row of the subject, owner Arbiter; or "none">
 
+## Peer-comms protocol
+<commit of `docs/peer-comms-protocol.md` read at this session's start; "unchanged since last handoff" or the roster change (R3.13)>
+
 ## Exposure summary
 <one line; pointer to `exposure/thinker.md` rows #…>
 

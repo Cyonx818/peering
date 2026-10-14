@@ -41,7 +41,7 @@ CURRENT-STATE CONTRACT (GUIDELINES R5.2, R5.3, R5.16). This file holds CURRENT r
 
 **Peers (current as of <date>).**
 
-| Name (set by the human) | Role / instance | Harness id at last contact | State | Handoff file / last commit |
+| Name (from the roster, `docs/peer-comms-protocol.md`) | Role / instance | Harness id at last contact | State | Handoff file / last commit |
 |---|---|---|---|---|
 | "<name>" | <role> | <id or "unknown"> | <online / closed> | <path> @ <hash> |
 

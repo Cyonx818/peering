@@ -8,6 +8,7 @@ File: `<structure path>` | Owner: Arbiter | GUIDELINES R2.1–R2.5, R2.12–R2.1
 |---|---|
 | `<docs>/` | rules, charter, goals, structure, status, methods, decision log |
 | `peers/` | `outbox-<role>.md` per role |
+| `<docs>/peer-comms-protocol.md` | the team roster, the sender check and the four message modes (R3.13); every role reads it at start; in the minimum |
 | `<docs>/holds.csv` | the holds table (R3.12): one append-only CSV, in the minimum |
 | `exposure/` <!-- KNOB: blinding --> | `<role>.md` per role |
 | `<role>/journal-<date>.md` | each role's session journal |
@@ -21,7 +22,8 @@ File: `<structure path>` | Owner: Arbiter | GUIDELINES R2.1–R2.5, R2.12–R2.1
 | a ruling by the human | a row in `<decision log>` | `DECISION-LOG.csv` |
 | a role's memory of state | its handoff file | `HANDOFF-FILE.md` |
 | a hold or a release by the human (R3.12) | a row in `<docs>/holds.csv` (append only; the receiving role appends it) | `HOLDS.csv` |
-| a message with a `need:` | the sender's outbox | `OUTBOX.md` |
+| a message with a `need:` | the sender's outbox, with its `mode:` | `OUTBOX.md` |
+| the team roster, sender-check steps or message modes (R3.13) | `<docs>/peer-comms-protocol.md` (owner: Arbiter; roster rows change on the human's word) | `PEER-COMMS-PROTOCOL.md` |
 | a prediction before data <!-- KNOB --> | `<evidence>/prereg/` | `PREREGISTRATION.md` |
 | a review | `reviews/` | `REVIEW-REPORT.md` |
 | a method document for a measurement or analysis (R7.30) | `<docs>/methods/`, with a pitfalls table | |

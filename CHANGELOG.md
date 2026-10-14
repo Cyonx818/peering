@@ -8,6 +8,7 @@ Produced from a fourth exchange with the source project's sessions: the gap anal
 
 ### Upgrading from v1.4
 Nothing is breaking. The full steps are in `README.md` § "Upgrading from v1.4"; in short:
+0. Copy `PEER-COMMS-PROTOCOL.md` to `docs/peer-comms-protocol.md`, fill the roster, read it at every start, and add a `mode:` line to every message and outbox row (R3.13).
 1. Copy the two new templates if their trigger has happened: `CODEBOOK.md` (scoring free-text reports) and `BLIND-INFERENCE-ROUND.md` (the new knob "Blind report inference").
 2. Re-copy the changed templates, by knob, and carry over your filled placeholders. Everyone: `START-COMMAND.md` (standing-rules rows), `ROLE-CHARTER.md` (rules 11–12, reset line), `HANDOFF-COMMAND.md`, `PROJECT-INSTRUCTIONS.md`, `STRUCTURE.md`, `WRITE-SCOPES.md`, `SUBAGENT-BRIEF.md`. Thinker: `BRIEF.md`, `RESPONSE.md`, `THINKER-HANDOFF.md`. Evidence: `PREREGISTRATION.md`, `REVIEW-REPORT.md`, `DATA-STATUS-LEDGER.md`. Applied-work discipline: `OPERATOR-FOLDER-HANDOFF.md`.
 3. Add the count-only pass and selection-rule check to every pre-registration not yet sealed (R7.37, R7.38); give applied-work reviews the whole-subject sweep (R6.13 scope); move mechanical jobs to tested scripts (R6.15); move a blind round's words and prediction files outside the working tree and check the analyst's staged inputs by content (R8.18).
@@ -15,7 +16,8 @@ Nothing is breaking. The full steps are in `README.md` § "Upgrading from v1.4";
 5. `commit_paths.py` and `atom_diff.py` are unchanged; their tests (the 23 helper tests and the atom-diff tests) still apply.
 6. **Your part (the human).** Nothing unless you turn on blind report inference; then about two minutes per round to mark at most five cells. Asks now end with a "not needed" line; Thinker questions to you state the decision they unlock and fit in about a minute.
 
-### New rules (appended within their sections; 15)
+### New rules (appended within their sections; 16)
+- R3.13 load the peer-comms protocol at start, tag every message with its mode (see "Peer-comms protocol" below).
 - R4.15 rank the questions before the research (#67).
 - R5.18 a failed premise closes its design in the record (#61).
 - R6.15 scripts for mechanical jobs; R6.16 produce only what a decision uses (#65).
@@ -23,7 +25,8 @@ Nothing is breaking. The full steps are in `README.md` § "Upgrading from v1.4";
 - R8.18 blind inference of the human's report (#66).
 - R9.19 stop rule for iterative applied work; R9.20 measure in chosen contexts, build for the use (#69); R9.21 package guards are margins with valence.
 
-### Amended rules (ids unchanged; 25)
+### Amended rules (ids unchanged; 27)
+- R3.2: the `mode:` header line. R3.9: sender name checked against the roster.
 - R2.13: objective promotion trigger (same hash on two work items and a passing test); the promotion commit adds the registry row.
 - R3.10: search the record before a test on a peer's lead (#68); now with a Why line.
 - R4.1 and R4.2: a review request may be a message naming a committed artifact at its hash; only the Arbiter sends it, and it carries no grants or folder override.
@@ -56,6 +59,12 @@ Nothing is breaking. The full steps are in `README.md` § "Upgrading from v1.4";
 - New: `CODEBOOK.md`, `BLIND-INFERENCE-ROUND.md`.
 - Changed: `PREREGISTRATION.md` (count-only pass with the proxy branch, selection-rule check, actor operating point in §B; fit-set commits in §H); `REVIEW-REPORT.md` (disposition footer; unit checklist; codebook and model-version checklist; delete checklists that do not apply); `BRIEF.md` (message-form note; ranked research questions); `RESPONSE.md` (audit shape; message request in the header); `HANDOFF-COMMAND.md` (peer wire-in tables read directly; closed-design row; message requests paired); `THINKER-HANDOFF.md` (closed designs); `STRUCTURE.md` (§3b promotion-runs column; two placement rows); `WRITE-SCOPES.md` (round files split into sealed, in-tree and coded-data rows; footnote 21); `PROJECT-INSTRUCTIONS.md` (scripts, search-the-record and guard sentences; "not needed" line); `OPERATOR-FOLDER-HANDOFF.md` (loop state, unused-metric counter, "not needed" line); `START-COMMAND.md` (standing rules for the new action-time rules; message requests); `ROLE-CHARTER.md` (reset line; rules 11–12); `SUBAGENT-BRIEF.md` (scripts and blind-analyst constraints); `DATA-STATUS-LEDGER.md` (count-only passes); `CONSOLIDATION.md` and `PANEL-BRIEF.md` (small).
 - `commit_paths.py`, `atom_diff.py` and their tests: unchanged.
+
+### Peer-comms protocol (added 2026-10-14, before the v1.5 release; no version bump)
+CHANGELOG convention: a change made while the version is unreleased is recorded in that version's section; v1.5 is not yet committed, so this is part of v1.5, not v1.5.1. From the human's requirement of 2026-10-14.
+- New rule R3.13: every role loads the project's `docs/peer-comms-protocol.md` at start and tags every message and outbox row with a `mode:` (free, relay, blinded, courier). New template `PEER-COMMS-PROTOCOL.md` (roster, sender verification, the four modes).
+- `PEER-MESSAGE-PROTOCOL.md` kept as the outbox-mechanics file; its "Authority and trust" section moved into the new template (no rule is stated twice). Amended: R3.2 (the `mode:` header line, not counted in the line limits), R3.9 (the name check is against the roster; handoff §0 keeps live state only). Core-rules box and the §15 peer-messaging row updated. Rule ids unchanged.
+- Templates changed: `OUTBOX.md` (Mode column), `START-COMMAND.md` (step 5 reads the protocol; standing rule; report line 12), `HANDOFF-COMMAND.md`, `ROLE-CHARTER.md` (rule 13), `THINKER-HANDOFF.md`, `HANDOFF-FILE.md` (§0 name column), `STRUCTURE.md`, `PROJECT-INSTRUCTIONS.md`.
 
 ### §13 and §15
 - §13 gains six rows (verdict fixed by the counts, filter against the effect, blind analyst with a readable answer, reliability on the tuning sample, unit artifact, the question sets the scope). §15 gains the knob "Blind report inference" and updates the "Pre-registration" and "Applied-work discipline" rows.
