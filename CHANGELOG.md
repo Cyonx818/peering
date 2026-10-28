@@ -54,6 +54,11 @@ Five seats (architect, agentic, usability, security, writing) reviewed the appli
 - **Human-facing text:** "Your job as the human" lists the seven v1.7 asks; the setup time is an estimate; the smoke tests follow Quick start A; the vocabulary and translation table cover the v1.7 terms.
 Left for the human: whether a tool swap may proceed without an ack when the receiver holds no live lease (R10.11, incident #115); whether the always-on provisional rules stay in the table; the R7.3 / R7.23 conflict (W5).
 
+### Decided after the panel (to apply in the next revision)
+- R10.11: a shared-tool swap may proceed without an acknowledgment when the receiving role holds no live lease.
+- Provisional rules (R2.21, R9.28 and any future one) are opt-in until proven, not always on.
+- R7.3 / R7.23: any datum outside a pre-registration's declared fit set may confirm it, whether recorded before or after the commit.
+
 ## v1.6 (2026-10-20)
 
 Produced from a fifth exchange with the source project's sessions: the gap analysis of what the source project learned between 2026-10-14 and 2026-10-20 (65 learnings: 15 covered, 30 partial, 20 missing), the reverse analysis's "where the source project is ahead" list (A1–A8) and the framework-side contradictions it found (three; one applied at R3.9, one left unchanged below, one needing no change), and the three role lessons files. Applied by one writer, then run through the five-seat review panel (R7.16; see "Review panel (R7.16; `reviews/v1.6/`)" below). Keyed to appendix incidents #70–#94 (new in this version). No existing rule id was renumbered or moved. Every conservative call and skipped item is listed in the maintainers' development records (not published).
