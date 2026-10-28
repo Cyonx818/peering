@@ -1,4 +1,4 @@
-# Peering: a framework for multi-session human–AI peer collaboration (v1.5)
+# Peering: a framework for multi-session human–AI peer collaboration (v1.7)
 
 ## What this is
 
@@ -20,13 +20,39 @@ The framework was extracted from a long-running research project (`appendix-work
 
 ## Your job as the human
 
-| | What |
-|---|---|
-| **Do** | Start each session with its start command and end it with the handoff command. Name each session when reminded (Claude Code: `/rename`). Push when you choose (sessions never push). Relay "check your inbox" between sessions only if your harness has no cross-session messaging. Run the guarded delete script yourself when raw data must go (R10.9, knob: data intake). |
-| **Say** | Rulings when a session asks (each becomes a decision-log row with your words; you see the new row ids in every Arbiter handoff report). Facts you changed (silence means no change, R9.3). Names for things you save (R9.4). A side task for the Thinker in the Thinker's own chat (R4.12). Whether you want a scored test on your own work; the default is informal (R9.9). Your own report on a change before you see its numbers, and whether you report first or after the blind analysis is committed (R9.16). Knob blind report inference: your own mark on each blind cell (named / partly / missed / can't say), from its claim line alone, before you see any number (R8.18). "Confirm or correct" on a ruling recorded from someone else's wording, and "confirm" on a hold a peer relayed (R7.31, R3.12). Answers to the Thinker's few one-choice questions when a brief allows them (R4.14, knob). One raw sample of a format when a tool needs it (R7.34). Once, a standing permission to rename and register files you deliver (R2.11, knob: data intake). |
-| **Decide** | Goals and scope. Which item to do next after each start report. Every ask on your time (each states what it buys). Method disputes. Lifting a seal (R8.11). Which session continues if two of one role are open (R1.8). A deputy if the Arbiter is lost (R1.7). When an iterative loop stops: you may end it at any time, and a session tells you when it sees nothing left worth trying (R9.19). When a held or `deferred` item may start: only your own words release a hold, even one a peer relayed (R3.12). |
+**Do**
+- Start each session with its start command and end it with the handoff command.
+- Name each session when reminded (Claude Code: `/rename`).
+- Push when you choose (sessions never push). With the Public mirror knob on, run the mirror publish script instead of pushing (R10.12).
+- Relay "check your inbox" between sessions only if your harness has no cross-session messaging.
+- Run the guarded delete script yourself when raw data must go (R10.9, knob: data intake).
+- Run `/<project>-queue` when you want to clear everything waiting on you (R9.24).
 
-Everything else is the sessions' job. If a session asks you for anything else, R9.5 and R12.1 say it should not (the rows above, including the knob rows, are the whole list). If you are a blinded subject: do not open files outside the human-readable set (R8.9) while a step is held.
+**Say**
+- Rulings when a session asks (each becomes a decision-log row with your words; you see the new row ids in every Arbiter handoff report).
+- Facts you changed (silence means no change, R9.3). Names for things you save (R9.4).
+- A side task for the Thinker in the Thinker's own chat (R4.12).
+- Whether you want a scored test on your own work; the default is informal (R9.9).
+- Your own report on a change before you see its numbers, and whether you report first or after the blind analysis is committed (R9.16).
+- "Confirm or correct" on a ruling recorded from someone else's wording, and "confirm" on a hold a peer relayed (R7.31, R3.12).
+- One raw sample of a format when a tool needs it (R7.34).
+- (knob: blind report inference) Your own mark on each blind cell (named / partly / missed / can't say, or pass the round), from its claim line alone, before you see any number (R8.18). Once, in your own words, whether rounds run values-first (R8.18 (8)).
+- (knob: Thinker) Answers to the Thinker's few one-choice questions when a brief allows them (R4.14).
+- (knob: data intake) Once, a standing permission to rename and register files you deliver (R2.11).
+- (v1.7, applied work) Only if you turn a preference zone on: at a milestone you choose, one word for each settings group (happy / ok / not there; R9.28). Your own choice for a setting that shows no footprint, which is then "set by your preference" (R9.19).
+- (v1.7) The name of a run context the references cannot identify (R2.20), and a name for each initiative when more than one shares the repository (R2.21).
+- (v1.7) A yes for each work queue and for each later addition (R9.24). The violations a time-switched rule accepted while it only warned are queued for you before it starts blocking (R2.19); the queue command lists them.
+
+**Decide**
+- Goals and scope. Which item to do next after each start report. Every ask on your time (each states what it buys). Method disputes.
+- Whether an outside tool or non-default dependency is adopted, after reading its fit assessment (R2.16).
+- Which design a large build uses, when a session sets it beside a cheaper priced alternative (R6.17).
+- Lifting a seal (R8.11). Which session continues if two of one role are open (R1.8). A deputy if the Arbiter is lost (R1.7).
+- When an iterative loop stops: you may end it at any time, and a session tells you when it sees nothing left worth trying (R9.19).
+- When a held or `deferred` item may start: only your own words release a hold, even one a peer relayed (R3.12).
+- (v1.7) Whether any budget-saving mode is on: what it defers, what it never defers and when it lapses. It counts only as a decision-log row in your words (R6.18).
+
+Everything else is the sessions' job. If a session asks you for anything else, R9.5 and R12.1 say it should not (the lists above, including the knob lines, are the asks the framework defines; the v1.7 additions are marked). If you are a blinded subject: do not open files outside the human-readable set (R8.9) while a step is held.
 
 ## Harness requirements
 
@@ -34,32 +60,40 @@ Everything else is the sessions' job. If a session asks you for anything else, R
 |---|---|---|---|
 | Slash commands with arguments | start and handoff commands | `.claude/commands/<project>-<role>.md`; `$ARGUMENTS`; front matter `argument-hint`, `description`, `allowed-tools`, `disable-model-invocation: true` (only you can trigger them) | Paste the command file as the session's first message |
 | Auto-loaded rules file | every session | `CLAUDE.md` at the repo root; `@` imports (about 5 hops in `CLAUDE.md`, one level in commands; large files dropped silently, R2.6) | Paste it at session start; keep it ≤ 120 lines |
-| Subagents with short returns | orchestrator mode (R6.1–R6.5) | the Agent tool; resume by agent id only while the parent session lives | Direct-writer mode: the session does the work itself and writes detail to files |
+| Subagents with short returns | orchestrator mode (R6.1–R6.5) | the Agent tool; resume by agent id only while the parent session lives. A type's tools come from its definition (`tools:` in `.claude/agents/<type>.md`) or are fixed for a built-in type; the Agent tool cannot narrow them per spawn, so a restricted read needs a restricted type or a permission rule | Direct-writer mode: the session does the work itself and writes detail to files |
 | Cross-session messaging | live peer notifications (R3.6) | `ListAgents` / `SendMessage` (deferred tools; load with `ToolSearch` `select:ListAgents,SendMessage`); availability depends on version and configuration | Outbox files only; you are the courier ("check your inbox") |
 | Persistent memory | behavior rules (§11) | the project memory folder and its `MEMORY.md` index (per machine, not in git; index truncated after about 200 lines) | The committed memory mirror (R11.9) read at start |
 | Permission rules | R10.6 | `.claude/settings.json` `permissions.allow` / `ask` / `deny` (`templates/settings-permissions.json`) | Prose bans only; review commits |
 | Session names | sender checks (R3.9) | `/rename` | A name line in each session's first report |
-| Per-agent read isolation | staged inputs for independent agents (R6.11) | a fresh private directory per agent outside the working tree, listing checked before launch. Staging hides paths, but a subagent still auto-loads the rules file and the memory index, so those carry no outcome value of a held or scored step. For strict blindness run the blind agent as a separate session whose working directory is the staged folder (or another mechanism that prevents the auto-load); at the high-risk knob also a post-run transcript read audit | Staging plus the auto-load rule: the listing proves what was offered, not what was read or loaded; without transcripts write `Reads unverified` in the output header |
+| Per-agent read isolation | staged inputs for independent agents (R6.11) | a fresh private directory per agent outside the working tree, listing checked before launch. Staging hides paths, but a subagent still auto-loads the rules file and the memory index, so those carry no outcome value of a held or scored step (a mandatory check for an R7.50 analysis, never a KNOB). For strict blindness run the blind agent as a separate session whose working directory is the staged folder (or another mechanism that prevents the auto-load); at the high-risk knob also a post-run transcript read audit | Staging plus the auto-load rule: the listing proves what was offered, not what was read or loaded; without transcripts write `Reads unverified` in the output header |
 
 **Prerequisites.** git (any recent version; the helper writes the trailer itself) · Python 3.8+ on macOS or Linux (the helper uses `fcntl`) · if the sandbox is on, its write allowlist includes `<repo>/.git` (the helper writes objects, the index and its lock there) · if `.claude/` is a symlink to a shared repository, the command files are committed there, not here · the Thinker on a different model: start that session with `claude --model <id>` or `/model` (a command's `model:` front matter applies only to that command's turn).
 
 **Helper environment.** `commit_paths.py` reads three optional environment variables. `PEERING_ROLE` is the fallback for `--role`; it is validated against the `ROLES` list in the helper's CONFIG block exactly like the flag (an unknown value is refused), and you should never export it in a shell profile that several sessions share, because every session's shell inherits it and every commit would then carry one role; pass `--role <role-id>` on every call. `PEERING_HELD_FILE` is the fallback for `--held-file` (the pending-blinded-steps CSV, R8.17); set it in the rules file for every role. `PEERING_BRANCH` restricts commits to one branch. A project with the blinding knob on also sets `REQUIRE_HELD_FILE` in its helper copy (the helper reads `PEERING_REQUIRE_HELD_FILE=1` for the same effect) so that a forgotten held list refuses the commit. A bootstrap commit made before roles exist uses `--no-role "<reason>"`, which writes `Session-Role: none (<reason>)` so the bypass shows in `git log`; the settings template puts that flag in the `ask` list.
 
-## Quick start A: the minimum (two roles, under an hour)
+## Quick start A: the minimum (two roles; about an hour for most setups, an estimate)
 
 An **Arbiter** (owns records, standards and tools) and one **Operator** (your day-to-day interface for the applied work). Delete every line tagged `KNOB` in the templates unless its trigger in Quick start B has happened.
 
 | # | Step | Time |
 |---|---|---|
-| 1 | Copy `templates/commit_paths.py` (and `test_commit_paths.py`) to `scripts/`; run `python3 -m unittest discover -s scripts -p 'test_commit_paths.py'` (23 tests, a few seconds); edit `ROLES` in the helper's CONFIG block to your role ids (see "Helper environment" below) | 5 min |
-| 2 | Fill `templates/PROJECT-INSTRUCTIONS.md` as `CLAUDE.md`: what the project is, rules 2, 5, 7, 8, 11, 12, the sessions table | 10 min |
+| 1 | Copy `templates/commit_paths.py` (and `test_commit_paths.py`) to `scripts/`; run `python3 -m unittest discover -s scripts -p 'test_commit_paths.py'` (23 tests, a few seconds); edit `ROLES` in the helper's CONFIG block to your role ids (see "Helper environment" above) | 5 min |
+| 2 | Fill `templates/PROJECT-INSTRUCTIONS.md` as `CLAUDE.md`: what the project is, rules 2, 5, 7, 8, 10, 11, 12, the sessions table | 10 min |
 | 3 | Two charters from `templates/ROLE-CHARTER.md` (arbiter: orchestrator mode; operator: direct writer). Put the "Minimum variant" table of `templates/WRITE-SCOPES.md` in `docs/STRUCTURE.md` with the placement test from `templates/STRUCTURE.md` | 10 min |
 | 4 | Create `docs/decisions.csv` from `templates/DECISION-LOG.csv` (header only). First row: your adoption of the roles and scopes, in your words | 2 min |
 | 5 | One handoff file per role from `templates/HANDOFF-FILE.md`, keeping Header (the Record line, the Session state table with its "Wired this session" row and the Open wire-in table; "none" is valid, R5.15), §0, §1, §2, §6 (one line: "Open holds: <ids or none>"), §7, §10. Create `docs/holds.csv` from `templates/HOLDS.csv` (header only; the holds table, R3.12) and `peers/outbox-arbiter.md` and `peers/outbox-operator.md` from `templates/OUTBOX.md` | 5 min |
 | 6 | Install commands: `templates/START-COMMAND.md` twice as `.claude/commands/<project>-arbiter.md` (common steps + Arbiter block) and `<project>-operator.md` (common steps + Operator block); `templates/HANDOFF-COMMAND.md` once as `<project>-handoff.md` (Arbiter and Operator branches). Fill the `allowed-tools` placeholders. Optionally merge `templates/settings-permissions.json` into `.claude/settings.json` | 10 min |
-| 7 | Smoke tests (below) | 10 min |
+| 7 | Smoke tests (next section) | 10 min |
+
+The times are estimates, not measurements. The command templates are long (about 7,000 words together), so step 6 can take longer than its 10 minutes. Steps 2, 3, 5 and 6 can be handed to a bootstrap session (commit with `--no-role "bootstrap"`); your own time is then mostly step 1, your words in step 4 and reviewing the filled files.
 
 Worked, filled versions of these files for a small invented project: `examples/minimal-setup.md`.
+
+## Smoke tests
+
+1. **Commit helper.** In a scratch clone: commit a new file with `--role` (expect exit 0 and only that file in the commit); commit with no role and no `PEERING_ROLE` (expect exit 2 and a message that lists the configured roles and does not name a bypass); commit with `--role` set to a name not in `ROLES` (expect exit 2); commit with `--no-role "bootstrap"` (expect exit 0 and the trailer `Session-Role: none (bootstrap)`); commit `.` (expect exit 2); hold the lock from a second shell (`python3 -c` with `fcntl.flock`) and commit (expect exit 3 after `--timeout`); with the blinding knob on, pass `--held-file` a missing path, the Markdown view and a CSV with a pending row (expect exit 2 for the first two, and a refused verdict word next to the pending id for the third). The bundled unit tests cover these and pairs, frozen paths, held subjects (CSV only, fail closed; only an exact `released` frees a row), secrets in files and messages, and leases.
+2. **Messaging.** Session A lists agents and sends a one-line notification to B; B receives it; A closes; B sends to A and observes what happens. Write the observed semantics into the table in `PEER-MESSAGE-PROTOCOL.md`. Send one message per mode (free, relay, blinded, courier) and check the receiver's sender check against the roster in `docs/peer-comms-protocol.md`. No messaging tool → outbox files only.
+3. **Start / handoff round trip.** Run the Arbiter start: expect a ≤ 15-line report that ends by waiting for you, with no permission prompts. Ask for one trivial change. Run the handoff: expect a commit through the helper, a header carrying the "Wired this session" row and the Open wire-in table ("none" is valid), rows edited in place with no new header block, and a final line `Next session: …`. Open a fresh session, run the start, and check it names the change. Then run the heading check from the handoff file's contract (`grep -n '^## ' <file>`) and check it passes (sections present in the template's order, the minimum §0 §1 §2 §6 §7 §10 present: the shipped example passes); delete a required heading in a scratch copy and check the start stops with "handoff structure broken". Run `cd templates && python3 -m unittest test_atom_diff` (the atom-diff tool's tests). Hold test: in the Operator session tell the Arbiter "hold X until I say so", have it relay that to the Operator, then reset the Operator and start it fresh: the report must list the hold as `held (relayed, unconfirmed)` first and ask you to confirm it. All pass → setup is done; do the token audit (R6.6) after the first real cycle.
 
 ## Quick start B: grow when the trigger happens
 
@@ -78,13 +112,58 @@ Worked, filled versions of these files for a small invented project: `examples/m
 | You deliver files (captures, exports) to the project | data intake: normalize on receipt, catalog | R2.11, R10.9 |
 | A second tool duplicates an existing one, or you have more than a handful | the tool registry (until then the rules file's Key commands list is the registry) | R2.12; `STRUCTURE.md` §3b |
 | Raw data must be freed or deleted | catalog first, guarded delete script the human runs | R10.9 |
-| Tools read data that a held step covers | the machine-read held list: CSV record, Markdown view, helper `--held-file` | R8.16, R8.17; `PENDING-BLINDED-STEPS.csv`, `.md` |
+| Tools read data that a held step covers | the machine-read held list: CSV record (with `held_subject` and `holds_from`, so later data of the subject are matched too), Markdown view, helper `--held-file` | R8.12, R8.16, R8.17; `PENDING-BLINDED-STEPS.csv`, `.md` |
 | Scorers are built by agents | scorer built from the pre-registration text, pre-run rulings, one-run definition, pins that retire | R7.23–R7.27, R10.8; `PREREGISTRATION.md` |
 | A protocol or framework needs maximum rigor | the five-seat review panel | R7.16; `PANEL-BRIEF.md`, `REVIEW-REPORT.md` |
 | Two sessions collide on files often | one worktree per role | §15 |
 | The human's subjective report is part of the measure and the session infers it from instrument data | blind report inference: words and prediction files sealed outside the working tree (only their sha256 committed), a redacted parent review, a content-token check, the human marks each blind cell; a codebook scored against base rates. On even when the blinding knob is off | R8.18, R7.39, R7.40, R7.41, R6.11; `BLIND-INFERENCE-ROUND.md`, `CODEBOOK.md` |
 | You score free-text reports of any kind (tickets, comments, the human's notes) and the counts feed a decision, a hit rate or a claim | a codebook with priors and inter-coder agreement on a fresh sample (on whenever such reports are scored; reading reports one by one is not scoring) | R7.40, R7.41; `CODEBOOK.md` |
+| The project holds raw media or publish-restricted data, or has a public remote | media out of version control, a strip list (`STRUCTURE.md` §3d), a deterministic mirror script (you run it; it refuses while any step is held), direct push disabled | R10.12, R7.15; knob "Public mirror" |
+| A peer runs your shared tools while you change them | build in a private clone, tool-swap notice and ack (not a hold), drift check, swap, "done" (already on whenever two roles share a working copy) | R10.11, R2.8 |
+| An outside tool or non-default dependency is proposed, or a tool prints a number below its own floor | a fit assessment before adoption; void out-of-rule output | R2.16, R2.17; `STRUCTURE.md` §3b |
+| Packages of advice go to the human | a pre-relay check script and exact identity keys, once a standing ruling has been caught by hand | R9.25, R7.48 |
+| A repeating workflow (a search, a screening, an intake campaign) | a workflow log of lessons and every candidate's data | R14.3 |
+| (already on with applied work; listed so you know what to expect) A first package for a new configuration, or a "no data" basis | every setting designed with a label and a resolvable source; "no data" only after the listed sources were searched | R9.27, R9.13 |
+| (already on with applied work; listed so you know what to expect) The same mistake caught a second time | one root-cause pass, then only the minimum effective remediation | R9.26 |
+| An analysis designed after the data were recorded | design commit before decoding; never VALIDATED, at most STRONG; the analyst's harness-loaded context checked | R7.50; `REVIEW-REPORT.md` |
+| A detector's parameter is tuned, or a per-case offset is calibrated from items assumed neutral | the detector tested against matched non-events first; calibration items justified | R7.51, R7.52; `REVIEW-REPORT.md` |
+| A rule that changes with time | visible switch, countdown, queue rows (a malformed stamp blocks a blinding, publish, frozen-record or secret guard) | R2.19 |
+| You want to save budget by deferring work | a budget mode: a decision-log row in your words that states what it defers, what it never defers and its lapse | R6.18 |
+| A summary figure or rating the system computes drives settings | read it as an output, never a target | R9.23 |
+| A build costs more than <K, e.g. 150 thousand> tokens or touches a pinned tool | a build plan with a cheaper alternative, decisions with fallbacks, the vetting table and per-phase rulings | R6.17, R4.16; `BUILD-PLAN.md` |
+| Asks on the human pile up across sessions | one command that walks the human through everything waiting, from declared state files | R9.24; `HUMAN-QUEUE-COMMAND.md` |
 | Applied work over several rounds (packages) | already on (§15 applied-work row): the stop rule, chosen measurement contexts, package guards with margin and valence, a use rule for review output; add the loop-state block | R9.19, R9.20, R9.21, R6.16; `OPERATOR-FOLDER-HANDOFF.md` |
+
+## Upgrading from v1.6
+
+v1.7 adds 11 rules and amends 30; nothing is renumbered and nothing is breaking. `atom_diff.py` is unchanged; `commit_paths.py` has one fail-closed fix (a status of `Released` or `RELEASED` no longer frees a held row; only an exact `released` does) and its 23 tests still apply (one test gained a row). No template is new. Adopt first the cheap clauses that prevent incidents: a checker that says what it skipped and never counts a skip as a pass (R2.15, appendix #101), and "no data" only after the listed sources were searched (R9.27, R9.13, appendix #95). In order:
+
+1. **Re-copy the changed templates, by knob**, and carry over your filled placeholders; for a one-sentence change, paste the sentence instead.
+   - **Everyone:** `SUBAGENT-BRIEF.md` (needs-shell line; number-parsing pitfalls; cache and fallback rules; tools-needed line; decision-inputs block), `STRUCTURE.md` (placement rows: initiative register, multi-run records, planned files, work queue, trigger bundles, setting-to-source map, caught-miss log), `HANDOFF-COMMAND.md` and `START-COMMAND.md` (two wire-in rows; a standing-rules row; budget-mode and caught-miss take-stock items; the handoff size-gate step; deferred tools in `allowed-tools`), `HANDOFF-FILE.md` (header rows "Budget mode" and "Start-read size"), `PEER-COMMS-PROTOCOL.md` (hold-registered notice, a `blinded` message), `settings-permissions.json` (`git rm` in `deny`).
+   - **Thinker knob:** `RESPONSE.md` (header row "Misses since last response"), `STATUS.md` (Thinker-log column "Premise failed").
+   - **Evidence knob:** `PREREGISTRATION.md` (three §B rows, a §G row, the after-capture design field), `REVIEW-REPORT.md` (tool checklist extended; two new checklists).
+   - **Blinding knob / machine-read held list:** `PENDING-BLINDED-STEPS.csv` and `.md` (columns `held_subject`, `holds_from` as an ISO 8601 timestamp, `peers_notified`; append the three columns to an existing held list, the helper reads only `step_id`, `family` and `status`; the data-reading tools you own must match `held_subject` and `holds_from`, R8.17).
+   - **Applied-work discipline:** `OPERATOR-FOLDER-HANDOFF.md` (four loop-state rows), `HUMAN-QUEUE-COMMAND.md` (proposed / ready states, new declared sources, resume across sessions from the declared path only).
+2. **Project-side changes. Hand this step to the Arbiter as one brief; you do nothing here.** The Arbiter applies each item the next time its trigger happens, not all at once. (a) Give every checker a per-run "checked / skipped" report and a coverage rule for each positive duty (R2.15; a checker prints what it did not check); (b) from now on the first package for a configuration, and the first after a structural change, designs every setting with a label and a resolvable source (R9.27), and search the listed sources before writing "no data" (R9.13); (c) after a second catch of one mechanism, run one root-cause pass and apply only the minimum remediation (R9.26); (d) a blind analysis of already-recorded data is filed as STRONG at most, never VALIDATED, with a design commit that precedes decoding (R7.50; an analysis designed after the data were recorded cannot be filed as validated); (e) record any budget-saving mode with its scope and lapse, as a decision-log row in the human's words (R6.18); (f) time-switched gates print their countdown and queue what they accept (R2.19; a rule that starts blocking on a date prints how long is left); (g) cite planned files as non-path text until they exist (R5.20).
+3. **Your part (the human).** Nothing is required at upgrade. From now on you may be asked for: a short endorsement word per settings group at natural milestones, only if you turn a preference zone on (R9.28); a yes for each work queue and addition, shown as "proposed, needs yes" until you approve (R9.24); the name of a run context the references cannot identify (R2.20) and of each initiative (R2.21); your choice for a setting with no footprint (R9.19); and a decision-log row for any budget-saving mode (R6.18). These are now in § "Your job as the human". You will also see a "checking" reply instead of a quick guess (R9.17) and a first package that lists every setting with its basis (R9.27).
+
+**What you will notice.** The v1.7 rules close the gap between "the checker passed" and "the work was done": a skipped check is shown, a first package is complete, and a repeated miss gets one analysis instead of one patch each.
+
+## Upgrading from v1.5
+
+v1.6 adds 19 rules and amends 33; nothing is renumbered and nothing is breaking. `commit_paths.py` and `atom_diff.py` are unchanged (their tests still apply). Adopt first the cheap clauses that prevent incidents: gating a commit on the check's own exit status, never a pipe (R10.4, appendix #70), and building commit path lists from the files the session wrote plus its subagents' OUT lines within their briefs, never the whole tree's status (R10.2, appendix #71). In order:
+
+1. **Copy two new templates** (only if their trigger has happened): `templates/BUILD-PLAN.md` (a build that costs more than <K> tokens or touches a pinned tool; R4.16, R6.17) and `templates/HUMAN-QUEUE-COMMAND.md` (one command that walks the human through what waits on them; R9.24).
+2. **Re-copy the changed templates, by knob**, and carry over your filled placeholders; for a one-sentence change, paste the sentence instead.
+   - **Everyone:** `PROJECT-INSTRUCTIONS.md` (rule 10: fit assessment, private clone, mirror; rule 12: deliverable first), `STRUCTURE.md` (§3b registry columns and statuses, new §3d strip list and §3e result-free path classes, two placement rows), `WRITE-SCOPES.md` (two rows), `SUBAGENT-BRIEF.md` (commit paths = OUT lines within the brief; shell pitfalls; tool-building rules), `ROLE-CHARTER.md` (rules 14 and 15), `HANDOFF-COMMAND.md` (the wire-in rows, an open tool swap in flight, the queue line), `HANDOFF-FILE.md` (owner `human`), `START-COMMAND.md` (the missing wire-in rows, standing rules for the new action-time rules, the queue line in the report) and `PEER-COMMS-PROTOCOL.md` (the instance-id check; the tool-swap notice), `settings-permissions.json` (`ask`: `git remote set-url` / `add` / `remove` / `rename`, `git clone`; `deny`: `git add` on raw-media paths, filter tools, the publish script; fill or delete the placeholders; the `git add` row only stops a stray direct add, and the binding media control is a repository check plus `.gitignore`, R10.12).
+   - **Thinker knob:** `BRIEF.md` (decisions with fallbacks; `answered-by:` line), `RESPONSE.md` (fallback column; failure-mode table).
+   - **Evidence knob:** `PREREGISTRATION.md` (four §B rows), `REVIEW-REPORT.md` (checklist for tools, builds and validity rules).
+   - **Applied-work discipline:** `OPERATOR-FOLDER-HANDOFF.md` (workflow log, pre-relay checker, round order). **Blind report inference:** `BLIND-INFERENCE-ROUND.md` (the order that ran may be `values first`).
+3. **Project-side changes.** (a) If two roles share a working copy, change shared tools a peer runs only from a private clone (R10.11); records and documents keep the in-place rule (R2.8). (b) If you hold raw media or publish-restricted data, or have a public remote, turn on the new knob "Public mirror": media out of version control, a strip list, a deterministic mirror script, direct push disabled (R10.12). (c) Register peer-built tools as `side, not reviewed` at once (R2.13); add a fit assessment and the human's yes before any outside tool or non-default dependency (R2.16). (d) Whenever you write or review a tool, build, acceptance test or validity rule (whatever the evidence knob says), give every acceptance test the question "could this fail on a wrong build?" (R7.45) and every validity rule two ends (R7.44). (e) Put your standing rulings about advice into one tested pre-relay script once a ruling has been caught by hand (R9.25).
+4. **Wire in:** phase rulings and adopted vetting items go into the method doc in the commit of their phase (R4.16); derived records are rebuilt only after their source is final (R5.19).
+5. **Your part (the human).** Nothing is required at upgrade. From now on you also approve outside tools and non-default dependencies (R2.16), choose between a build and its cheaper priced alternative when the trade is yours (R6.17), run the mirror publish script yourself under the Public mirror knob (R10.12), and may run the new command that lists everything waiting on you (R9.24). One optional decision: the order of a blind round. The default is unchanged (your marks come before the next values). If you would rather have the values first, say so once, in your own words; it is recorded as a ruling, marking becomes optional per round, and nothing then gates your values (R8.18 (8), R9.22).
+
+**What you will notice.** No stage you did not ask for runs before your answer (R9.22); if you choose values-first, the next values arrive with the open prompt. Values are never carried over from another subject without a basis; the message is "no data", followed by the sources that were searched (R9.13, R9.27). A tool that prints a number below its own floor is fixed, and the number is withdrawn (R2.17).
 
 ## Upgrading from v1.4
 
@@ -119,12 +198,6 @@ v1.5 adds 16 rules (R3.13: the peer-comms protocol and message modes) and amends
 3. Create `holds.csv` from `templates/HOLDS.csv`, add §6 (one line) to each handoff file, and re-copy the start command's step 7 and A5 (i)–(k), the handoff command's wire-in "ruling" row, Holds row and step 11, the rules file's rules 2 and 12, and the charter's role-specific rules.
 4. Run the helper tests (23).
 
-## Smoke tests
-
-1. **Commit helper.** In a scratch clone: commit a new file with `--role` (expect exit 0 and only that file in the commit); commit with no role and no `PEERING_ROLE` (expect exit 2 and a message that lists the configured roles and does not name a bypass); commit with `--role` set to a name not in `ROLES` (expect exit 2); commit with `--no-role "bootstrap"` (expect exit 0 and the trailer `Session-Role: none (bootstrap)`); commit `.` (expect exit 2); hold the lock from a second shell (`python3 -c` with `fcntl.flock`) and commit (expect exit 3 after `--timeout`); with the blinding knob on, pass `--held-file` a missing path, the Markdown view and a CSV with a pending row (expect exit 2 for the first two, and a refused verdict word next to the pending id for the third). The bundled unit tests cover these and pairs, frozen paths, held subjects (CSV only, fail closed), secrets in files and messages, and leases.
-2. **Messaging.** Session A lists agents and sends a one-line notification to B; B receives it; A closes; B sends to A and observes what happens. Write the observed semantics into the table in `PEER-MESSAGE-PROTOCOL.md`. Send one message per mode (free, relay, blinded, courier) and check the receiver's sender check against the roster in `docs/peer-comms-protocol.md`. No messaging tool → outbox files only.
-3. **Start / handoff round trip.** Run the Arbiter start: expect a ≤ 15-line report that ends by waiting for you, with no permission prompts. Ask for one trivial change. Run the handoff: expect a commit through the helper, a header carrying the "Wired this session" row and the Open wire-in table ("none" is valid), rows edited in place with no new header block, and a final line `Next session: …`. Open a fresh session, run the start, and check it names the change. Then run the heading check from the handoff file's contract (`grep -n '^## ' <file>`) and check it passes (sections present in the template's order, the minimum §0 §1 §2 §6 §7 §10 present: the shipped example passes); delete a required heading in a scratch copy and check the start stops with "handoff structure broken". Run `cd templates && python3 -m unittest test_atom_diff` (the atom-diff tool's tests). Hold test: in the Operator session tell the Arbiter "hold X until I say so", have it relay that to the Operator, then reset the Operator and start it fresh: the report must list the hold as `held (relayed, unconfirmed)` first and ask you to confirm it. All pass → setup is done; do the token audit (R6.6) after the first real cycle.
-
 ## Translation table (other kinds of project)
 
 | Rule family | Research with a subject | Software | Writing | Ops |
@@ -136,6 +209,9 @@ v1.5 adds 16 rules (R3.13: the peer-comms protocol and message modes) and amends
 | Blinding (§8) | the human rates without seeing results | reviewers who do not see the author's expected result | readers who do not see the intended effect | — (usually off) |
 | Dose (§9) | repetitions, blocks | reviewer hours, QA passes | reader sessions | on-call interruptions |
 | Integrity (§10) | hashed read-only data | protected branch, CI | — | read-only production access |
+| Applied work (§9: package, lever, range, readout) | a settings set, each setting's adjustable range, the displayed summary figure | a config change set, allowed values or schema, a dashboard KPI | an edit set, style-guide bounds, a readability score | a change window's parameters, policy limits, an SLO panel |
+| Configuration (R9.27, R9.28, R7.51: configuration, structural change, settings group, detector) | a setup and its adjustable settings, a replaced component, a settings page, an event flag | a deployment's config, a dependency or schema upgrade, a config module, an alert rule | a style sheet, a change of form or audience, a section of the style sheet, a lint rule | a service's parameter set, a platform migration, a policy group, an alert |
+| Endorsement (R9.28) | a word per settings page at a campaign's end | a word per config area at a release | a word per section at a draft's end | a word per policy group after a change window |
 
 ## File map
 
@@ -144,7 +220,7 @@ v1.5 adds 16 rules (R3.13: the peer-comms protocol and message modes) and amends
 | `README.md` | this file | minimum | first |
 | `GUIDELINES.md` | numbered rules with Why / Fails as; knobs (§15) | minimum | the core-rules box at setup; a section when its knob turns on |
 | `appendix-worked-example.md` | the source project and the incidents behind the rules | — | when a rule seems like red tape |
-| `examples/minimal-setup.md` | filled minimum files for an invented project | — | during Quick start A |
+| `examples/minimal-setup.md` | filled minimum files for an invented project (current for v1.7; last changed in v1.6) | — | during Quick start A |
 | `CHANGELOG.md` | what changed between versions and why | — | when upgrading |
 | `LICENSE` | MIT terms for the docs, templates and helper | — | before reusing or redistributing |
 | `templates/commit_paths.py`, `test_commit_paths.py` | the commit helper (lock, new files, pairs, frozen paths, held subjects from the CSV list, role list and `--no-role REASON`, secrets in files and messages, leases) and its tests | minimum | setup |
@@ -174,6 +250,8 @@ v1.5 adds 16 rules (R3.13: the peer-comms protocol and message modes) and amends
 | `templates/PREREGISTRATION.md`, `templates/DATA-STATUS-LEDGER.md` | predictions before data; spent-data status | knob: evidence | before a confirmatory test |
 | `templates/CODEBOOK.md` | a codebook for free-text reports: axes, units and weights, out-of-scope bucket, "unspecified" values, valence, prior table with smoothing, agreement table, uncodable share | knob: blind report inference (also on whenever free-text reports are scored, R7.40, R7.41) | before scoring reports |
 | `templates/BLIND-INFERENCE-ROUND.md` | per-round file set for a blind report inference: sealed words and prediction files, blind cells file (claim and basis lines), the scoring card, score file; who may read which; commit order; audit lines | knob: blind report inference | each round (R8.18) |
+| `templates/BUILD-PLAN.md` | a design memo for a multi-phase build: summary with the priced cheaper alternative, decisions with fallbacks, phases, vetting table, per-phase rulings, failure modes, generality check, superseded line | default (builds above the token threshold) | before a large build (R4.16, R6.17) |
+| `templates/HUMAN-QUEUE-COMMAND.md` | one command that walks the human through every item waiting on them, from declared state files only, with options, a recommendation and what each unlocks | default | setup; whenever asks pile up (R9.24) |
 | `templates/PENDING-BLINDED-STEPS.csv`, `templates/PENDING-BLINDED-STEPS.md`, `templates/EXPOSURE-LOG.md` | held steps (values-free): the CSV is the one machine-read record, the Markdown file its human-readable view; per-role exposure files | knob: blinding (machine-read list: knob) | every start while blinding is on |
 | `templates/REVIEW-REPORT.md`, `templates/PANEL-BRIEF.md` | CR / RO reviews; the five-seat panel | default / knob: maximum rigor | reviewing |
 | `templates/AUTOMATION-RUNS.md` | per-job last run and "new since last run" (feeds take-stock); the status file's table is the lighter alternative | knob: automation | Arbiter start (R5.9) |
@@ -226,6 +304,19 @@ v1.5 adds 16 rules (R3.13: the peer-comms protocol and message modes) and amends
 | Dose | the amount of work asked of the human, with what it buys and why this many (R9.1) |
 | Blind report inference; codebook; count-only pass | an analyst infers what the human experienced from instrument data while the human's words are physically absent (sealed outside the working tree), and the human marks the cells from claim lines (R8.18); the set of coding axes, priors and agreement table that scores free-text reports (R7.40, R7.41); a count-only run on the data a pre-registration will score, before it is sealed (R7.37) |
 | Package guard | a non-inferiority check on an outcome a package must not worsen, with a margin and an unwanted side (R9.21); not a tool guard that refuses a datum (R8.16) |
+| Values-first round | a blind round whose next values are sent first, as a bare list, with the open prompt, by the human's explicit ruling; marking is optional and never gates the values (R8.18 (8), R9.22) |
+| Open prompt | the fixed, committed question that asks the human for their words in a blind round, naming no lever or expected effect (R8.18 (1)) |
+| Private clone; tool-swap notice; swap | a copy of the repository outside the shared tree where a shared tool is changed and tested, then copied in after a notice to every role that runs it, their acks and a drift check; the notice is not a hold (R10.11) |
+| `side, not reviewed` | registry status of a peer-built tool whose outputs stay leads until promotion (R2.13) |
+| Build plan; vetting table | the design memo of a large build and the per-decision verdicts from its review (R4.16, R6.17) |
+| Pre-relay check; standing ruling | one tested script that checks every package against the human's standing rulings before the human sees it; a standing ruling is a rule about how advice is shaped that the human gave once (R9.25) |
+| Workflow log | per-step lessons of a workflow the human will run again (R14.3) |
+| Design commit (after capture); blind analysis after capture | the commit of a design and metric list made after the data were recorded; such an analysis is never VALIDATED and earns at most STRONG (R7.50) |
+| Negative-only checker | a checker that flags forbidden content only; it cannot certify a positive duty (R2.15) |
+| Preference zone | a per-subject range built by script from outcomes the human endorsed, used as a starting prior and never as a fence (R9.28) |
+| Queue command | the one command that walks the human through everything waiting on them, from declared state files only (R9.24) |
+| Public mirror; strip list | a deterministic filtered copy of the history published to a public remote while the local history stays intact for hash citations; the list of paths and extensions it removes (R10.12) |
+| Fit assessment | the written check, before adopting an outside tool or dependency, of every intended use against barred parties and existing tools, with a ground-truth benchmark where it reads data (R2.16) |
 | Quick-reference card | an optional short card of rules and leads the Operator consults during the human's live work; curated by the Arbiter |
 | Research packet | curated excerpts the Arbiter prepares from outside sources for the Thinker (R4.5) |
 | Playbook | the project's method doc for sessions that ask the human to act (walkthrough format, dose) |
@@ -236,6 +327,17 @@ v1.5 adds 16 rules (R3.13: the peer-comms protocol and message modes) and amends
 | Lens card; rival slot; catch-all; kill plan; red team | investigation-phase terms: see the `templates/LENS-CARDS.md` header and R7.18–R7.21 |
 | Pre-run rulings | the Arbiter's rulings on a scorer builder's flagged gaps, committed before any datum is read (R7.23) |
 | Value-free subject | a commit subject that names the step and verdict class only (R8.15) |
+| Positive duty | something a deliverable must contain (every setting designed, every source cited), as opposed to something it must not contain (R2.15) |
+| Budget mode | a recorded, time-limited decision, in the human's words, to defer named work to save budget (R6.18) |
+| Time-switched rule | a check that warns until a set date and blocks after it, printing the time left (R2.19) |
+| Verdict-diff sweep | re-running a changed checker over every record and listing the verdicts that changed, with causes (R10.11) |
+| Basis label; setting-to-source map | the kind of reason behind a value (calculation, data, precedent, judgment); the list of where to look for each setting before writing "no data" (R9.27) |
+| Structural change; `held (parent)` | a change that alters which settings exist or what they act on (R9.27, R2.18); a setting a later package leaves at its parent package's value (R9.27) |
+| Endorsement word | the one-word verdict per settings group that feeds a preference zone (R9.28) |
+| Initiative register | one row per line of work that shares the repository (R2.21) |
+| Run scope | one metadata block per run in a multi-run file, "run k of N" (R2.20) |
+| Provisional | a rule based on one project's incidents, revisited when a second project reports (GUIDELINES §15) |
+| Caught-miss log | one row per correction the human makes to a session's work, keyed by mechanism (R9.26) |
 
 ## License
 

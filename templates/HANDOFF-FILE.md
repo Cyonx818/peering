@@ -29,8 +29,10 @@ CURRENT-STATE CONTRACT (GUIDELINES R5.2, R5.3, R5.16). This file holds CURRENT r
 | Checks at that end | <repo checks, tests, integrity: result> |
 | Wired this session | <item → surface (commit)>, or "none" (R5.15) |
 | Running work | <live subagents (id, task, output path, checkpoint), uncommitted files, or "none"> |
+| Budget mode (R6.18) | <id; defers; never defers; lapse date; decision-log id with the human's words>, or "none" |
+| Start-read size (R6.6) <!-- KNOB: token audit --> | <bytes per start-read region; table cells over the cell limit; commit>, overwritten by the size gate at every handoff |
 
-**Open wire-in** (R5.15; "none" is valid, written as one line)
+**Open wire-in** (R5.15; "none" is valid, written as one line). Owner is a role id, or `human` when only the human can close the item (it then appears in the queue command, R9.24).
 
 | Item | Target surface | Owner | State |
 |---|---|---|---|

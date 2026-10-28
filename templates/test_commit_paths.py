@@ -196,10 +196,12 @@ class CommitPathsTest(unittest.TestCase):
         self.assertEqual(r.returncode, 2)
 
     def test_held_status_only_exact_released_frees_a_row(self):
-        self.write("held.csv", "step_id,family,status\nP-12,F3,not released\nP-13,F4,released\nP-14,F5,\n")
+        self.write("held.csv", "step_id,family,status\nP-12,F3,not released\nP-13,F4,released\nP-14,F5,\nP-15,F6,Released\n")
         self.write("score.md", "x\n")
         r = self.run_helper("--held-file", "held.csv", "-m", "P-12 FAIL", "--", "score.md")
         self.assertEqual(r.returncode, 2, "'not released' must stay held")
+        r = self.run_helper("--held-file", "held.csv", "-m", "P-15 FAIL", "--", "score.md")
+        self.assertEqual(r.returncode, 2, "'Released' (not exact) must stay held")
         r = self.run_helper("--held-file", "held.csv", "-m", "P-14 FAIL", "--", "score.md")
         self.assertEqual(r.returncode, 2, "an empty status must stay held")
         r = self.run_helper("--held-file", "held.csv", "-m", "P-13 FAIL", "--", "score.md")

@@ -46,5 +46,5 @@ The human's rulings are listed as decision-log ids (the log holds the verbatim w
 ## Thinker log <!-- KNOB: Thinker -->
 One row per brief sent, per free-form discussion (≤ 5 lines, R4.8), and a disposition when the Arbiter acts on a response (R4.10); one disposition per response item (adopted / retired / open, with the surface it was wired to; R5.15).
 
-| Date | Brief / discussion | Response | Exposure (pointer to row) | Disposition (adopted / overridden: reason / open; per item if mixed) |
-|---|---|---|---|---|
+| Date | Brief / discussion | Response | Exposure (pointer to row) | Disposition (adopted / overridden: reason / open; per item if mixed) | Premise failed (response item; record path; values-free, R8.2; or blank) |
+|---|---|---|---|---|---|

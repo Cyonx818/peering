@@ -51,6 +51,8 @@ Decided by the human on <YYYY-MM-DD> (decision log `<DEC-id>`). GUIDELINES §2.
 | tools, tests; commit helper | S | P | R | no |
 | a tool the Operator (or a role whose charter grants it) built in its own folder, with its fixtures, until promoted (R2.13) | R (promotes it) | S | N | no |
 | tool registry <!-- KNOB: tool registry --> | S | P | R | no |
+| build memos `<docs>/plans/` (R4.16): decisions with fallbacks, vetting table, per-phase rulings | S | P | R; P (the vetting table, via a response) | yes |
+| publish strip list and mirror script, commit map (R10.12) <!-- KNOB: public mirror --> | S | R | R | no |
 | check script, scope list, frozen manifest, hooks | S | P | P | no |
 | session commands and prompts | S | P (own start fragments) | P (own start fragments) | no |
 | Thinker briefs <!-- KNOB: Thinker --> | S | P (asks via the Arbiter) | R | no |

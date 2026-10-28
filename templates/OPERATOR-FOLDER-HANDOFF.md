@@ -21,6 +21,13 @@
 | Unused metrics (R6.16) | <metric → rounds unused (count); updated each round so the drop rule survives a reset> |
 | Loop log | <pointer to the loop log: per round what changed the decision, what was computed and changed nothing (R6.16)> |
 | Stop-call state (R9.19) | <rounds so far; consecutive null rounds from different hypotheses; best remaining lever vs the human's noise at a practical dose; "continue" / "say stop"> |
+| Workflow log (R14.3) | <pointer to the log of a repeating workflow (per step worked / failed / lesson; human time; predictions scored) and to the per-candidate data kept; the next run starts from its lessons> |
+| Pre-relay checker (R9.25) | <result per package: pass / hit fixed / hit overridden with reason; path of the script's output> |
+| First package complete designed set (R9.27) | <yes / ledger path; checker coverage result, including what it skipped (R2.15), or "script-listed, audited by hand" where no checker exists; the reviewer's hits; "no data" rows with the sources searched> |
+| Settings set by the human's preference (R9.19) | <settings with no footprint at N tried values, frozen at the human's choice> |
+| Verdicts re-applied to the decision rule by a tested script (R6.1, R6.15) | <corrections made before relay / none> |
+| Confounds checked before crediting a primary (R9.14) | <everything else that changed in the phase, including what the human did differently / none found> |
+| Round order (R8.18 (8), R9.22) | <report first / analysis first / values first (only by the human's ruling: DEC id); skipped rounds logged "unscored"> |
 | Targets (R9.20) | <exemplars and what they share; not a single liked result as the target> |
 
 ## Protocol that worked

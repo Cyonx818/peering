@@ -54,6 +54,9 @@ LIMITS (say these out loud in your rules file)
   - The role trailer is self-asserted: the session passes --role. It proves nothing about who ran it. The
     role list stops typos, not impersonation.
   - The holds table (GUIDELINES R3.12) is not read here: this helper commits, it does not read data.
+  - The held list's held_subject and holds_from columns (R8.12) are not used here either: matching a
+    datum by subject and time is the job of the data-reading tools (R8.17). Only step_id, family and
+    status are read, and only an exact "released" status frees a row.
   - Not implemented here (project options, GUIDELINES R2.5, R8.15): an append-only prefix guard for logs and
     ledgers, and a numeric tripwire for the subjects of scored-result commits.
   - It cannot tell whose edit a working-tree change is. "One committer per shared file" (R2.7) does that job.
@@ -328,7 +331,7 @@ def held_ids(root, held):
                 sid = row.get("step_id", "").strip("`*")
                 if not sid:
                     raise Refused("held file %s has a row without a step_id (R8.17)" % held)
-                if row.get("status", "").lower() == "released":
+                if row.get("status", "") == "released":
                     continue
                 ids.append(sid)
                 fam = row.get("family", "").strip("`*")

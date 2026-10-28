@@ -30,9 +30,12 @@ checker, drafted with Sam page by page. Claims about the site ("all links resolv
    `python3 scripts/commit_paths.py --role <role-id> -m "<subject>" -- <paths>`. No destructive git command.
 7. Write scopes: `docs/STRUCTURE.md` §2. The arbiter edits nothing itself; subagents return STATUS / OUT / OPEN.
 8. New files: placement test in `docs/STRUCTURE.md` §1.
+10. Dependencies: standard library only unless Sam agrees after a fit assessment (R2.16). Scripts the operator
+    runs are changed from a private clone, with a tool-swap notice to the operator, never in place (R10.11).
 11. No secrets in any record, message or commit body.
-12. Every ask of Sam says what it buys and why this many. Sam's stated facts are the record. When Sam is
-    waiting, answer first and do bookkeeping after.
+12. Every ask of Sam says what it buys and why this many, and ends with a "not needed" line. Sam's stated
+    facts are the record. When Sam is waiting, answer first and do bookkeeping after; Sam's deliverable is
+    sent first and no stage he did not ask for gates it (R9.22).
 
 ## Sessions and write scopes
 | Role id | Start / end | Primary stakeholder of |

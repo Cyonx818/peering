@@ -11,8 +11,9 @@ File: `response-<YYYY-MM-DD>-<topic>.md` (same date and topic as the brief)
 | Shape | hypotheses / audit / specification / merge / plan |
 | Files read | `<path>` §<…>; `<path>` §<…> |
 | Reads beyond the brief | none / <query or file>, purpose (R4.6) |
-| Pre-scan | every file read was grepped for held identifiers first: <clean / hit at … → stopped, ruling …> |
+| Pre-scan | every file read was grepped for held identifiers first: <clean / hit at … → stopped, ruling … / hits at <lines>, declared mentions, withheld (R4.11 narrow exception; withheld ranges: <…>)> |
 | Exposure | none / <files, data, families seen that carry outcome values; channel>; rows in `exposure/thinker.md` |
+| Misses since last response | <built only from the status file's Thinker-log "Premise failed" column: each premise of an earlier response that failed, the record that showed it and what it changed> / none, meaning no entry since the last response (R4.10) |
 | Class of everything below | lead (lowest class) |
 | Cost <!-- KNOB: cost --> | <bytes or tokens read; agent runs requested> |
 
@@ -36,9 +37,11 @@ File: `response-<YYYY-MM-DD>-<topic>.md` (same date and topic as the brief)
 
 
 ### Shape C: specification
-| # | Decision (not an option) | Acceptance test (numeric) | Dose and noise model | Why | Kill test (the check that would show it wrong; R4.9) |
-|---|---|---|---|---|---|
-| 1 | | | | | |
+| # | Decision (not an option) | Acceptance test (numeric) | Dose and noise model | Why | Kill test (the check that would show it wrong; R4.9) | Fallback if the data fails it (R4.16) |
+|---|---|---|---|---|---|---|
+| 1 | | | | | | |
+
+For a phased build, add a failure-mode table: | Failure mode | Test that pins it | Open (owner) | and check that no acceptance test passes by construction (R7.45).
 
 For a design or method answer in any shape, add one line: **Kill test:** <the check that would show the design wrong>. A recommendation without one is a hypothesis to test, not a design to adopt (R4.9).
 

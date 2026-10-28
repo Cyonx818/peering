@@ -2,7 +2,8 @@
 
 Date: <YYYY-MM-DD> | Author (predictor): <fresh subagent id> | Scorer: <fresh subagent id, assigned at commit; never the predictor> | Owner: Arbiter | Status: Registered
 <!-- KNOB: evidence / pre-registration. Commit BEFORE any data it is scored on is captured or opened (R7.2).
-     After the commit §A–§H are frozen; only §V (deviations) and §R (result) are appended. -->
+     After the commit §A–§H are frozen; only §V (deviations) and §R (result) are appended.
+     A design committed after the data were recorded is not a pre-registration: use the field `design_commit (after capture)` in place of the pre-registration commit, state the documented state value for it, and never record it as VALIDATED (provenance class at most STRONG; a lead labeled "blind analysis after capture" where the evidence knob is off; R7.50). -->
 
 ## §A Question and claim
 <The claim under test, its current class, and what it becomes on PASS / FAIL.>
@@ -23,6 +24,13 @@ Date: <YYYY-MM-DD> | Author (predictor): <fresh subagent id> | Scorer: <fresh su
 | Count-only pass (R7.37) | <script or counts mode; per cell: samples, passes or subjects surviving every selection rule; histogram of each selection variable; result path @ commit. If the counts already fix the outcome category, do not mint. Data not yet recorded: counts on the closest existing data of the same kind, labeled "proxy counts" (named, outside the fit set where possible); if none exists, "no proxy" and a pre-written support-refusal outcome (what is reported if the real counts fix the category, e.g. "not resolvable"); re-run on the real data before scoring> |
 | Selection-rule check (R7.38) | <per rule: kept count as the quantity of interest grows; confounded with the effect? how paired or modeled> |
 | Actor operating point (R7.2) <!-- KNOB: only if an actor is part of the instrument --> | <where the actor runs relative to the limit; measurement cited (file, n)> |
+| Minimum-effect floor of the sign test (R7.42) | <the smallest mean residual that triggers a refit, e.g. one display unit; below it the record reads "significant, below the floor"> |
+| What this set can decide / cannot decide (R7.42) | <e.g. a one-subject set decides a measure but not a between-subject slope> |
+| Held-out set never printed for selection (R7.12) | <yes: no score of this set was printed per candidate; else the set is spent and a fresh one is named here> |
+| Does a pass move a class? What the record already settles (R7.2) | <what the record already fixes (for example the sign); the scored size or shape cell the rivals predict differently; "none: the primary cell is open"> |
+| Predicted vs read quantity (R7.2) | <same kind, unit and window: yes / the difference and how it is handled> |
+| Calibration items (R7.52) <!-- KNOB: only if a per-case offset or scale is calibrated from items assumed neutral --> | <per item: why it carries no effect under test; items moved to the decision set, with removal rows (verdict with and without)> |
+| Configuration reconciled against a conserved total (R7.49) | <the independent total (weight, cost, count, checksum) and the item-by-item reconciliation path; "not applicable" if no configuration is read from partial observations> |
 
 ## §C Prediction
 | Cell | Predicted value | Tolerance band | Plausible range | Basis (derivation, sources with query / commit) |
@@ -53,6 +61,7 @@ Rivals whose intervals converge in the design's regime make it non-separable: re
      State the floor and the cap, each with its basis, and the counted unit and its overhead (R9.1); the ask ends with a "not needed" line. -->
 
 ## §G Blinding and exposure <!-- KNOB: blinding -->
+- Count-only passes (R7.37): <script path @ content hash; what each printed; exposure ruling row: exposure-free / what it exposed>.
 - Predictor's forbidden files: <list>. The predictor's brief carried no outcome values.
 - Brief author's logged exposures: <rows or "none">; leak check by an unexposed reader: <reviewer id / n.a.> (R7.4, R8.10).
 - Thinker material read by the predictor: <response body @ commit, certified value-free by the Arbiter on <date> / none> (R4.7).
